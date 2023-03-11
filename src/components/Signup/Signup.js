@@ -21,7 +21,7 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const signup = async () => {
-        let data = await fetch(`http://localhost:4500/Aut/email/${email}`)
+        let data = await fetch(`https://easy-ser.vercel.app/Aut/email/${email}`)
         data = await data.json()
         if (data.email) {
             toast("already Have account")
@@ -31,7 +31,7 @@ const Signup = () => {
             setLoading(true)
             let otp = Math.floor(Math.random() * 100000);
             setOtpp(otp);
-            let result = await fetch('http://localhost:4500/Aut/verification', {
+            let result = await fetch('https://easy-ser.vercel.app/Aut/verification', {
                 method: "post",
                 body: JSON.stringify({ email, otp }),
                 headers: {
@@ -51,7 +51,7 @@ const Signup = () => {
     const fun = async () => {
         setLoading(true)
         if (veri == otpp) {
-            let result = await fetch(`http://localhost:4500/Aut/signup`, {
+            let result = await fetch(`https://easy-ser.vercel.app/Aut/signup`, {
                 method: 'post',
                 body: JSON.stringify({ name, number, email, password }),
                 headers: {

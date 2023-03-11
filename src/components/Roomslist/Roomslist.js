@@ -17,7 +17,7 @@ const Roomslist = () => {
         AllRoom();
     }, [])
     const AllRoom = async () => {
-        let data = await fetch(`http://localhost:4500/room/roomlist`);
+        let data = await fetch(`https://easy-ser.vercel.app/room/roomlist`);
         data = await data.json();
         SetRoom(data);
     }
@@ -25,7 +25,7 @@ const Roomslist = () => {
         let key=event.target.value;
         console.log(key)
         if (key) {
-            let result = await fetch(`http://localhost:4500/room/searchroom/${key}`);
+            let result = await fetch(`https://easy-ser.vercel.app/room/searchroom/${key}`);
             result = await result.json();
             if (result) {
                 SetRoom(result)

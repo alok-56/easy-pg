@@ -16,7 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const signin = async () => {
-        let result = await fetch(`http://localhost:4500/Aut/signin`, {
+        let result = await fetch(`https://easy-ser.vercel.app/Aut/signin`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
             headers: {

@@ -22,7 +22,7 @@ const Success = () => {
     }, [])
 
     const Successpayment = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/bookinglist/${params.id}`);
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/bookinglist/${params.id}`);
         data = await data.json();
         console.log(data)
         if (data) {

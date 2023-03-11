@@ -21,7 +21,7 @@ const Payment = () => {
     })
 
     const Payment = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/userbookinglist/${params.id}`);
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/userbookinglist/${params.id}`);
         data = await data.json();
         setDate(data);
         for (var i = 0; i < date.length; i++) {
@@ -32,7 +32,7 @@ const Payment = () => {
             if (Difference_In_Days > 30) {
                 if (data[i].status != 'cancelled') {
                     let id = data[i]._id;
-                    let update = await fetch(`http://localhost:4500/roombooking/updatebooking`, {
+                    let update = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
                         body: JSON.stringify({ id, pay }),
                         headers: {
@@ -42,7 +42,7 @@ const Payment = () => {
                     update = await update.json();
                     if (Difference_In_Days > 35) {
                         let id = data[i]._id;
-                        let update = await fetch(`http://localhost:4500/roombooking/updatebooking`, {
+                        let update = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                             method: "put",
                             body: JSON.stringify({ id, status, pay }),
                             headers: {
@@ -62,7 +62,7 @@ const Payment = () => {
     }
 
     const sendCancelemail = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/book/cancel`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancel`, {
             method: "post",
             body: JSON.stringify({ email, id }),
             headers: {
@@ -77,7 +77,7 @@ const Payment = () => {
     }
 
     const ownerCancelemail = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/book//cancelowner`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book//cancelowner`, {
             method: "post",
             body: JSON.stringify({ email, id }),
             headers: {
@@ -101,7 +101,7 @@ const Payment = () => {
             name: "THIRD HOME",
             order_id: data.id,
             handler: async function (response) {
-                let data = await fetch('http://localhost:4500/payment/verify', {
+                let data = await fetch('https://easy-ser.vercel.app/payment/verify', {
                     method: "post",
                     body: JSON.stringify({ response }),
                     headers: {
@@ -121,7 +121,7 @@ const Payment = () => {
 
     const update = async (id) => {
         let pay="paid";
-        let data = await fetch(`http://localhost:4500/roombooking/updatebooking`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
             body: JSON.stringify({ id, pay }),
             headers: {
@@ -136,7 +136,7 @@ const Payment = () => {
         let transitionId = db.data.payment_id;
         let orderId = db.data.order_id;
         // navigate('/Success/' + orderId)
-        let data = await fetch(`http://localhost:4500/roombooking/updatebooking/update`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking/update`, {
             method: "put",
             body: JSON.stringify({
                 id, transitionId, orderId
@@ -153,7 +153,7 @@ const Payment = () => {
             navigate('/rooms/single/' + id)
         }
         else {
-            let result = await fetch(`http://localhost:4500/payment/orders`, {
+            let result = await fetch(`https://easy-ser.vercel.app/payment/orders`, {
                 method: "post",
                 body: JSON.stringify({ price }),
                 headers: {

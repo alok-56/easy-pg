@@ -21,13 +21,13 @@ const Forgotpass = () => {
 
     async function fun() {
         // const Email = JSON.parse(localStorage.getItem('user')).email;
-        let data = await fetch(`http://localhost:4500/Aut/email/${email}`)
+        let data = await fetch(`https://easy-ser.vercel.app/Aut/email/${email}`)
         data = await data.json()
         if (data.email) {
             setLoading(true)
             let otp = Math.floor(Math.random() * 100000);
             setOtpp(otp);
-            let result = await fetch('http://localhost:4500/Aut/verification', {
+            let result = await fetch('https://easy-ser.vercel.app/Aut/verification', {
                 method: "post",
                 body: JSON.stringify({ email, otp }),
                 headers: {
@@ -56,7 +56,7 @@ const Forgotpass = () => {
     const changepass = async () => {
         if (password == compassword) {
 
-            let result = await fetch('http://localhost:4500/Aut/forgot', {
+            let result = await fetch('https://easy-ser.vercel.app/Aut/forgot', {
                 method: "put",
                 body: JSON.stringify({ email, password }),
                 headers: {

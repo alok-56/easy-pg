@@ -59,7 +59,7 @@ function MyVerticallyCenteredModal(props) {
 
 
     const productdata = async () => {
-        let data = await fetch(`http://localhost:4500/room/roomlist/${params.id}`)
+        let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${params.id}`)
         data = await data.json();
         setRoomname(data.roomname);
         setImg(data.img);
@@ -89,7 +89,7 @@ function MyVerticallyCenteredModal(props) {
             name: "THIRD HOME",
             order_id: data.id,
             handler: async function (response) {
-                let data = await fetch('http://localhost:4500/payment/verify', {
+                let data = await fetch('https://easy-ser.vercel.app/payment/verify', {
                     method: "post",
                     body: JSON.stringify({ response }),
                     headers: {
@@ -111,7 +111,7 @@ function MyVerticallyCenteredModal(props) {
         let transitionId = db.data.payment_id;
         let orderId = db.data.order_id;
         navigate('/Success/' + orderId)
-        let data = await fetch(`http://localhost:4500/roombooking/postbooking`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/postbooking`, {
             method: "post",
             body: JSON.stringify({
                 usersId, sellerId, transitionId, orderId, productId, name, pay, email, img, Ages, date, time, status, price, roomname, state, add, district, ownerEmail, ownername, ownerNumber
@@ -139,7 +139,7 @@ function MyVerticallyCenteredModal(props) {
     }
 
     const sellerEmail = async () => {
-        let data = await fetch('http://localhost:4500/roombooking/book/sellnotify', {
+        let data = await fetch('https://easy-ser.vercel.app/roombooking/book/sellnotify', {
             method: "post",
             body: JSON.stringify({ ownerEmail, usersId, name, email }),
             headers: {
@@ -157,7 +157,7 @@ function MyVerticallyCenteredModal(props) {
         setTimeout(() => {
             setLoad(true)
         }, 3000)
-        let result = await fetch(`http://localhost:4500/payment/orders`, {
+        let result = await fetch(`https://easy-ser.vercel.app/payment/orders`, {
             method: "post",
             body: JSON.stringify({ price }),
             headers: {
@@ -280,7 +280,7 @@ const Roomsingle = () => {
     }, [])
 
     const Roomsingle = async () => {
-        let data = await fetch(`http://localhost:4500/room/roomlist/${params.id}`);
+        let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${params.id}`);
         data = await data.json();
         setImage(data.roomimg);
         setRoomname(data.roomname);

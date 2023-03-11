@@ -13,7 +13,7 @@ const Setpass = () => {
         console.log(email)
         if (password == compassword) {
 
-            let result = await fetch('http://localhost:4500/Aut/forgot', {
+            let result = await fetch('https://easy-ser.vercel.app/Aut/forgot', {
                 method: "put",
                 body: JSON.stringify({ email, password }),
                 headers: {

@@ -19,7 +19,7 @@ const Booking = () => {
         getbook();
     }, [])
     const getbook = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/userbookinglist/${params.id}`);
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/userbookinglist/${params.id}`);
         data = await data.json();
         SetData(data);
     }
@@ -46,7 +46,7 @@ const Booking = () => {
 
             }
             else {
-                let data = await fetch(`http://localhost:4500/roombooking/updatebooking`, {
+                let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                     method: "put",
                     body: JSON.stringify({ id, status, canceldate, }),
                     headers: {
@@ -65,7 +65,7 @@ const Booking = () => {
     }
     const ownerCancelemail = async (id, email) => {
         console.log(book)
-        let data = await fetch(`http://localhost:4500/roombooking/book/cancelowner`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancelowner`, {
             method: "post",
             body: JSON.stringify({ id, email }),
             headers: {

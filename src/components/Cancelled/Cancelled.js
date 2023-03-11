@@ -13,7 +13,7 @@ const Cancelled = () => {
         CancelBook();
     }, [])
     const CancelBook = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/cancelbooking/${params.id}`)
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/cancelbooking/${params.id}`)
         data = await data.json();
         SetCancel(data.data)
 

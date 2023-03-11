@@ -41,7 +41,7 @@ function MyVerticallyCenteredModal(props) {
         user();
     }, [])
     const user = async () => {
-        let data = await fetch(`http://localhost:4500/Aut/singleuser/${userid}`);
+        let data = await fetch(`https://easy-ser.vercel.app/Aut/singleuser/${userid}`);
         data = await data.json();
         SetName(data.name);
         SetEmail(data.email);
@@ -50,7 +50,7 @@ function MyVerticallyCenteredModal(props) {
         SetProfession(data.profession)
     }
     const updateuser = async () => {
-        let data = await fetch(`http://localhost:4500/Aut/profile/${userid}`, {
+        let data = await fetch(`https://easy-ser.vercel.app/Aut/profile/${userid}`, {
             method: "put",
             body: JSON.stringify({ name, email, number, gender, profession, images }),
             headers: {
@@ -153,7 +153,7 @@ const Userprofile = () => {
 
     }, [])
     const user = async () => {
-        let data = await fetch(`http://localhost:4500/Aut/singleuser/${userid}`);
+        let data = await fetch(`https://easy-ser.vercel.app/Aut/singleuser/${userid}`);
         data = await data.json();
         setName(data.name);
         setEmail(data.email);

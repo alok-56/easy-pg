@@ -124,7 +124,7 @@ function MyVerticallyCenteredModal(props) {
     }
 
     const sendEmail = async () => {
-        let data = await fetch(`http://localhost:4500/roombooking/book/notify`, {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/notify`, {
             method: "post",
             body: JSON.stringify({ email, ownername, ownerNumber, sellerId }),
             headers: {

@@ -1,0 +1,46 @@
+#sign_head5{
+    width: 100%;
+    height: 100vh;
+     background-image: url('./images/bac.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    text-decoration: none;
+    list-style: none;
+}
+#form5{
+    width: 300px;
+    height: 100%;
+    margin: auto;
+    /* background-image: url("./images/headbag1.jpg");  */
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 1;
+}
+#form5 #logo5 img{
+    height: 70px;
+}
+#form5 #info5{
+    margin-top: 15px;
+}
+#form5 input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+#form5 input:hover{
+    border: 2px solid aqua;
+}
+@media(max-width:420px){
+    #form5{
+        width: 100%;
+        padding: 10px;
+    }
+}

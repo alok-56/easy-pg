@@ -1,0 +1,42 @@
+#sign_head{
+    width: 100%;
+    height: 100vh;
+    background-image: url('./images/bac.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(15, 14, 14);
+    text-decoration: none;
+    list-style: none;
+    color: #fff;
+}
+#form{
+    width: 350px;
+    height: 100%;
+    margin: auto;
+     /* background-image: url("./images/headbag1.jpg");  */
+     background-color: black;
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 1;
+}
+#info{
+    width: 100%;
+}
+#info #info_head{
+    display: flex;
+    justify-content: center;
+}
+#info #info_head input{
+    border: 1px solid blue;
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+}
+@media(max-width:420px){
+    #form{
+        width: 100%;
+    }
+}

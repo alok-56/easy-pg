@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&family=Montserrat:wght@300&family=Roboto+Condensed:wght@300&family=Rubik+Gemstones&family=Rubik:wght@300&family=Unbounded:wght@300;400&display=swap'); 
+#veri{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgb(222, 220, 220);
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&family=Montserrat:wght@300&family=Roboto+Condensed:wght@300&family=Rubik+Gemstones&family=Rubik:wght@300&family=Unbounded:wght@300;400&display=swap'); 
+#book{
+    font-family: 'Montserrat', sans-serif;
+}
+#pay_head{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(43, 44, 43);
+    font-family: 'Montserrat', sans-serif;
+
+}
+#payment_head{
+    width: 350px;
+    height: 450px;
+    background-color: aliceblue;
+    margin: auto;
+    box-shadow: 2px 2px 2px 2px rgb(165, 176, 165);
+    border-radius: 5px;
+    padding: 15px;
+}
+@media (max-width:400px){
+    #payment_head{
+        width: 100%;
+        height: 100%;
+        margin-top: 40px;
+    }
+}

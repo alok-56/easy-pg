@@ -1,0 +1,32 @@
+#roomnav{
+    width: 100%;
+    height:100%;
+    /* background-image: url("./images/nav.jpg"); */
+    background-color: black;
+    background-position: center;
+    background-size: cover;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+ #roomnav #search{
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: 5px;
+}
+#roomnav #search  input{
+    width: 90%;
+    background: none;
+    border: none;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px;
+}
+#roomnav #search #btn{
+    width: 10%;
+    float: right;
+    background-color: aqua;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+} 

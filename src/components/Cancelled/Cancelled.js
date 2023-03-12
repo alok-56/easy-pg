@@ -16,6 +16,7 @@ const Cancelled = () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/cancelbooking/${params.id}`)
         data = await data.json();
         SetCancel(data.data)
+        console.log(data)
 
     }
 
@@ -36,7 +37,7 @@ const Cancelled = () => {
                                             <img width={100} className="img-fluid" src={item.img} alt="Rooms"></img>
                                             <div>
                                                 <span style={{ fontSize: "12px" }}>{item.name}, {item.address}, {item.district}</span><br></br>
-                                                <span style={{ fontSize: "12px" }}>Single beds</span><br></br>
+                                                <span style={{ fontSize: "12px" }}>{item.roomtype}</span><br></br>
                                                 <span style={{ fontSize: "12px", fontWeight: "bold" }}>{item.canceldate}</span>
                                             </div>
                                         </div>
@@ -54,7 +55,7 @@ const Cancelled = () => {
                             </div>
 
                         ))
-                        : null
+                        : <span>Not Yet cancelled</span>
 
                 }
 

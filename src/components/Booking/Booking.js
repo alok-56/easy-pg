@@ -25,7 +25,6 @@ const Booking = () => {
     }
 
     const cancel = async (id, statuss, email, time, price, payment) => {
-        console.log(payment)
         if (statuss === 'cancelled') {
             toast("Your Booking is already cancelled")
         }
@@ -33,6 +32,7 @@ const Booking = () => {
             var canceldate = new Date();
             var Difference_In_Time = canceldate.getTime() - time;
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            console.log(Difference_In_Days)
             if (Difference_In_Days <= 1) {
                 // let data=await fetch(`http://localhost:4500/payment/refund`,{
                 //     method:"post",
@@ -43,6 +43,8 @@ const Booking = () => {
                 // })
                 // data=await data.json();
                 // console.log(data)
+                toast("Refund policy started")
+                
 
             }
             else {

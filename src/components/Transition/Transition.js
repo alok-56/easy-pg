@@ -71,7 +71,7 @@ const Transition = () => {
                                     </div>
                                 </div>
                             </div>
-                        )) : null
+                        )) : <span>No ant transition</span>
                 }
             </div>
         </div>

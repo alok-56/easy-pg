@@ -14,7 +14,7 @@ const Faq = () => {
                 <div className="row">
                     <h4 style={{ fontWeight: "bold" }}>Frequently Asked question</h4>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q: </span><span>Can We get refund after cancellation?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q: </span><span>Can We get refund after cancellation?</span>
                         {
                             show ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
@@ -33,7 +33,7 @@ const Faq = () => {
 
                     </div>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q:</span><span> How we get location of a room ?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q:</span><span> How we get location of a room ?</span>
                         {
                             show1 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow1(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow1(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
@@ -51,7 +51,7 @@ const Faq = () => {
                         }
                     </div>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q:</span><span> can we complain about room?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q:</span><span> can we complain about room?</span>
                         {
                             show2 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow2(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow2(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
@@ -71,7 +71,7 @@ const Faq = () => {
 
                     </div>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q:</span><span> Process of refund after cancellation?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q:</span><span> Process of refund after cancellation?</span>
                         {
                             show3 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow3(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow3(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
@@ -96,7 +96,7 @@ const Faq = () => {
 
                     </div>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q:</span><span> How we make payment to next month ?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q:</span><span> How we Pay to next month Rent ?</span>
                         {
                             show4 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow4(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow4(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
@@ -111,12 +111,12 @@ const Faq = () => {
                                 height: "100%",
                                 backgroundColor: "black",
                                 color: '#fff'
-                            }}> when your month is completed you automatically get notifaication on your gmail..and we amke payment from payment page..</span></div> : null
+                            }}> when your month is completed you automatically get notifaication on your gmail and you make payment from payment page..</span></div> : null
                         }
 
                     </div>
                     <div className="col-12">
-                        <span style={{ fontWeight: "bold", fontSize: "25px" }}>Q:</span><span> How can we post room on site ?</span>
+                        <span style={{ fontWeight: "bold", fontSize: "15px" }}>Q:</span><span> How can we post room on site ?</span>
                         {
                             show5 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow5(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow5(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }

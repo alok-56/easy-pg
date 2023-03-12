@@ -37,6 +37,8 @@ function MyVerticallyCenteredModal(props) {
     const [ownerEmail, setOwnerEmail] = useState('');
     const [ownerNumber, setOwnernNumber] = useState()
     const [add, setAdd] = useState('')
+    const params = useParams();
+    const navigate = useNavigate()
 
     const [product, setProduct] = useState('')
 
@@ -50,17 +52,12 @@ function MyVerticallyCenteredModal(props) {
         setEmail(useremail);
         productdata();
 
-    }, [])
-
-
-    const params = useParams();
-    const navigate = useNavigate();
-
-
-
+    }, []);
+    
     const productdata = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${params.id}`)
         data = await data.json();
+        console.log(data)
         setRoomname(data.roomname);
         setImg(data.img);
         setSellerId(data._id);

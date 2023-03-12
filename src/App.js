@@ -19,6 +19,7 @@ import Privatecom from './components/Privatecom/Privatecom';
 import Success from './components/Succcess/Success';
 import Ownerinfo from './components/Ownerinfo/ownerinfo';
 import Map from './components/Map/Map';
+import Roomsingle from './pages/Roomsingle/Roomsingle';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path='/loc' element={<Map></Map>}></Route>
             <Route path='/Success/:id' element={<Success></Success>}></Route>
             <Route path='/Ownerinfo/:id' element={<Ownerinfo></Ownerinfo>}></Route>
+            <Route path='/Rooms/single/:id' element={<Roomsingle></Roomsingle>}></Route>
           </Route>
 
           <Route path='/' element={<Home></Home>}></Route>
@@ -43,7 +45,7 @@ function App() {
           <Route path='/Signup' element={<Signup></Signup>}></Route>
           <Route path='/Signin' element={<Login></Login>}></Route>
           <Route path='/Rooms' element={<Rooms></Rooms>}></Route>
-          <Route path='/Rooms/single/:id' element={<Roomsinglenav></Roomsinglenav>}></Route>
+          <Route path='/Rooms/single/:id' element={<Roomsingle></Roomsingle>}></Route>
         </Routes>
       </BrowserRouter>
 

@@ -24,14 +24,16 @@ const Login = () => {
             }
         })
         result = await result.json();
-        console.log(result.code)
-        if (result.code==200) {
+        console.log(result)
+        if (result.email == email && result.password == password) {
             localStorage.setItem('user', JSON.stringify(result))
             navigate('/');
         }
         else{
-            toast("Wrong password")
+            toast("Wrong detail");
         }
+           
+       
     }
     return (
         <div>

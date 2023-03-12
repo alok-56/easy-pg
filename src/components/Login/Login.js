@@ -24,8 +24,8 @@ const Login = () => {
             }
         })
         result = await result.json();
-        console.log(result.status)
-        if (result.email == email && result.password == password) {
+        console.log(result.code)
+        if (result.code==200) {
             localStorage.setItem('user', JSON.stringify(result))
             navigate('/');
         }

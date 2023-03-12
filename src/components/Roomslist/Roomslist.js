@@ -6,13 +6,12 @@ import b1 from "./images/rooms.jpg"
 import './Roomslist.css'
 import "./Roomsnav.css"
 import Footer from "../Footer/Footer";
+import { SpinnerRoundOutlined } from 'spinners-react';
 
 const Roomslist = () => {
     const [room, SetRoom] = useState('')
-    const [se, setSe] = useState('')
     const navigate = useNavigate();
-    
-
+    const [load, setLoad] = useState(true)
     useEffect(() => {
         AllRoom();
     }, [])
@@ -20,9 +19,10 @@ const Roomslist = () => {
         let data = await fetch(`https://easy-ser.vercel.app/room/roomlist`);
         data = await data.json();
         SetRoom(data);
+        setLoad(false)
     }
     const search = async (event) => {
-        let key=event.target.value;
+        let key = event.target.value;
         console.log(key)
         if (key) {
             let result = await fetch(`https://easy-ser.vercel.app/room/searchroom/${key}`);
@@ -37,6 +37,7 @@ const Roomslist = () => {
     }
     return (
         <div>
+
             <div id="roomnav">
                 <div className="container-fluid ">
                     <div className="row">
@@ -63,57 +64,68 @@ const Roomslist = () => {
                     </div>
                 </div>
             </div>
+            {
+                load ? <div style={{
 
-            <div className="container mt-2">
-                <div className="row">
-                    <div className="col-12" id="roomlist">
-                        {
-                            room && room.length > 0 ?
-                                room.slice(0).reverse().map((item) => (
-                                    <div className="row mt-3">
-                                        <div className="col-lg-4 col-md-4 col-sm-12 col-12 ">
-                                            <div id="img">
-                                                <img className="img-fluid" src={b1} alt="roomlist"></img>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-8 col-md-8 col-sm-12 col-12">
-                                            <div id="info">
-                                                <div>
-                                                    <div style={{ display: "flex", justifyContent: "space-between" }} >
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop:"200px"
+                }}>
+                    <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
+
+                </div> :
+                    <div className="container mt-2">
+                        <div className="row">
+                            <div className="col-12" id="roomlist">
+                                {
+                                    room && room.length > 0 ?
+                                        room.slice(0).reverse().map((item) => (
+                                            <div className="row mt-3">
+                                                <div className="col-lg-4 col-md-4 col-sm-12 col-12 ">
+                                                    <div id="img">
+                                                        <img className="img-fluid" src={b1} alt="roomlist"></img>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-8 col-md-8 col-sm-12 col-12">
+                                                    <div id="info">
                                                         <div>
-                                                            <span><span style={{ color: "red", fontWeight: "bold", fontSize: "15px" }}>Rs {item.Fullroomprice}</span> <span style={{ fontSize: "12px" }}>onwards</span></span><br></br>
-                                                            <span><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.roomname} / </span> <span style={{ fontSize: "12px" }}>in {item.address}</span>  </span><br></br>
-                                                            <span><span style={{ fontWeight: "bold", fontSize: "15px" }}> {item.district}</span> {item.state}</span>
+                                                            <div style={{ display: "flex", justifyContent: "space-between" }} >
+                                                                <div>
+                                                                    <span><span style={{ color: "red", fontWeight: "bold", fontSize: "15px" }}>Rs {item.Fullroomprice}</span> <span style={{ fontSize: "12px" }}>onwards</span></span><br></br>
+                                                                    <span><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.roomname} / </span> <span style={{ fontSize: "12px" }}>in {item.address}</span>  </span><br></br>
+                                                                    <span><span style={{ fontWeight: "bold", fontSize: "15px" }}> {item.district}</span> {item.state}</span>
+                                                                </div>
+                                                                <div>
+                                                                    <span id="girls">{item.Preferred}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr></hr>
+                                                            <div id="cont">
+                                                                <span><span>Single room</span><br></br><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.Fullroomprice}</span></span>
+                                                                <span><span>Single bed</span><br></br><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.Siglebedprice}</span></span>
+
+                                                            </div>
+                                                            <hr></hr>
                                                         </div>
                                                         <div>
-                                                            <span id="girls">{item.Preferred}</span>
+                                                        </div>
+                                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                            <button className="btn btn-danger" onClick={() => navigate('/Rooms/single/' + item._id)}>View details</button><Link id="link" to="/Rooms/single + item._id"></Link>
+                                                            <button className="btn btn-danger">Owner info</button>
                                                         </div>
                                                     </div>
-
-                                                    <hr></hr>
-                                                    <div id="cont">
-                                                        <span><span>Single room</span><br></br><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.Fullroomprice}</span></span>
-                                                        <span><span>Single bed</span><br></br><span style={{ fontWeight: "bold", fontSize: "15px" }}>{item.Siglebedprice}</span></span>
-
-                                                    </div>
-                                                    <hr></hr>
-                                                </div>
-                                                <div>
-                                                </div>
-                                                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                                                    <button className="btn btn-danger" onClick={() => navigate('/Rooms/single/' + item._id)}>View details</button><Link id="link" to="/Rooms/single + item._id"></Link>
-                                                    <button className="btn btn-danger">Owner info</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )) : null
-                        }
+                                        )) : null
+                                }
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-            </div>
-            <Footer></Footer>
+            }
+
             {/* <div className="container mt-2">
                 <div className="row">
                     <div className="col-12" id="roomlist">

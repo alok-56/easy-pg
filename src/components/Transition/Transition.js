@@ -3,10 +3,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useParams } from "react-router-dom";
 import Navpage from "../Navbar/Navbar";
 import './Transition.css'
+import { SpinnerRoundOutlined } from 'spinners-react';
+
 
 const Transition = () => {
     const params = useParams();
     const [data, setData] = useState('')
+    const [loads,setLoads]=useState(true)
     useEffect(() => {
         getbook()
     }, [])
@@ -14,14 +17,25 @@ const Transition = () => {
     const getbook = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/userbookinglist/${params.id}`);
         data = await data.json();
-        setData(data)
+        setData(data);
+        setLoads(false)
     }
 
 
     return (
         <div>
             <Navpage></Navpage>
-            <div className="container mt-3 text-center">
+            {
+                 loads ? <div style={{
+
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "200px"
+                }}>
+                    <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
+
+                </div> :<div className="container mt-3 text-center">
                 {
                     data && data.length > 0 ?
                         data.slice(0).reverse().map((item) => (
@@ -74,6 +88,8 @@ const Transition = () => {
                         )) : <span>No ant transition</span>
                 }
             </div>
+            }
+            
         </div>
     )
 }

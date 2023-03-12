@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import './Success.css';
+import { SpinnerRoundOutlined } from 'spinners-react';
+
 
 const Success = () => {
     const params = useParams();
@@ -16,6 +18,7 @@ const Success = () => {
     const [ownerId, setOwnerId] = useState('');
     const [price, setPrice] = useState('');
     const [roomid, SetRoomid] = useState('');
+    const [load,setLoad]=useState(true)
 
     useEffect(() => {
         Successpayment();
@@ -37,11 +40,22 @@ const Success = () => {
             setOwnerId(data.sellerId);
             setPrice(data.price)
             SetRoomid(data.productId)
+            setLoad(false)
+           
         }
     }
     return (
         <div id="pay_head">
-            <div className="container">
+            {
+                  load ? <div style={{
+
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "200px"
+                }}>
+                    <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
+                    </div>: <div className="container">
                 <div className="row">
                     <div className="col-12 mt-5 text-center">
                         <div id="payment_head">
@@ -162,6 +176,8 @@ const Success = () => {
 
             </div>
 
+            }
+           
         </div>
     )
 }

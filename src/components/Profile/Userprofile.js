@@ -19,6 +19,7 @@ function MyVerticallyCenteredModal(props) {
     const navigate = useNavigate();
     const [profession, SetProfession] = useState('');
     const userid = JSON.parse(localStorage.getItem('user'))._id;
+  
 
     async function handle(e) {
         setLoading(true)
@@ -48,6 +49,7 @@ function MyVerticallyCenteredModal(props) {
         SetNumber(data.number);
         SetGender(data.gender);
         SetProfession(data.profession)
+        
     }
     const updateuser = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/Aut/profile/${userid}`, {
@@ -148,6 +150,7 @@ const Userprofile = () => {
     const [gender, SetGender] = useState('');
     const [images, SetImages] = useState('')
     const userid = JSON.parse(localStorage.getItem('user'))._id;
+    const [load, setLoad] = useState(true)
     useEffect(() => {
         user();
 
@@ -160,59 +163,73 @@ const Userprofile = () => {
         SetNumber(data.number);
         SetGender(data.gender);
         SetImages(data.images)
+        setLoad(false)
     }
     const [modalShow, setModalShow] = React.useState(false);
     const Navigate = useNavigate();
     return (
         <div>
             <Navpage></Navpage>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12 text-center mt-3">
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                            <div style={{ display: "block" }}>
-                                <img width={150} src={images} style={{ borderRadius: "50%" }} alt="profile"></img>
-                            </div>
-                            <div className="m-3">
-                                <span>{name}({gender})</span><br></br>
-                                <span style={{ fontSize: "13px" }}>{email}</span><br></br>
-                                <span style={{ fontSize: "13px" }}>{number}</span>
+            {
+                load ? <div style={{
+
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "200px"
+                }}>
+                    <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
+
+                </div> :
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 text-center mt-3">
+                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                    <div style={{ display: "block" }}>
+                                        <img width={150} src={images} style={{ borderRadius: "50%" }} alt="profile"></img>
+                                    </div>
+                                    <div className="m-3">
+                                        <span>{name}({gender})</span><br></br>
+                                        <span style={{ fontSize: "13px" }}>{email}</span><br></br>
+                                        <span style={{ fontSize: "13px" }}>{number}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button onClick={() => setModalShow(true)} className="btn btn-danger">Edit Profile</button>
+                                    <MyVerticallyCenteredModal
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)}
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <button onClick={() => setModalShow(true)} className="btn btn-danger">Edit Profile</button>
-                            <MyVerticallyCenteredModal
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                            />
+                        <div className="row mt-4">
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-12">
+                                <button
+                                    onClick={() => Navigate('/profile/booking/' + userid)}
+                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>My Booking</button>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
+                                <button
+                                    onClick={() => Navigate('/profile/cancel/' + userid)}
+                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Cancelled Rooms</button>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
+                                <button
+                                    onClick={() => Navigate('/profile/payment/' + userid)}
+                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>My Payment</button>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
+                                <button
+                                    onClick={() => Navigate('/profile/Transition/' + userid)}
+                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Transcition</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="row mt-4">
-                    <div className="col-lg-3 col-md-3 col-sm-12 col-12">
-                        <button
-                            onClick={() => Navigate('/profile/booking/' + userid)}
-                            className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>My Booking</button>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
-                        <button
-                            onClick={() => Navigate('/profile/cancel/' + userid)}
-                            className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Cancelled Rooms</button>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
-                        <button
-                            onClick={() => Navigate('/profile/payment/' + userid)}
-                            className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>My Payment</button>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
-                        <button
-                            onClick={() => Navigate('/profile/Transition/' + userid)}
-                            className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Transcition</button>
-                    </div>
-                </div>
-            </div>
+}
             <Faq></Faq>
             <Footer></Footer>
+
         </div>
     )
 }

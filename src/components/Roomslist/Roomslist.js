@@ -23,15 +23,15 @@ const Roomslist = () => {
         setLoad(false)
     }
     const search = async () => {
-
+        setLoad(true)
         let dat = data;
         dat = dat.toLowerCase();
         if (data) {
-           
             let result = await fetch(`https://easy-ser.vercel.app/room/searchroom/${dat}`);
             result = await result.json();
             if (result) {
                 SetRoom(result)
+                setLoad(false)
             }
         }
         else {

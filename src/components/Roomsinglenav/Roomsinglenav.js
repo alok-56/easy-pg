@@ -17,7 +17,7 @@ const Roomsinglenav = () => {
                         <div className="col-lg-6 col-md-6 col-sm-6 col-6  mt-2 ">
                             <h4><img width={100} src={logo}></img></h4>
                         </div>
-                        <div className="col-lg-6 col-sm-6 col-md-6 col-6  mt-2 text-center">
+                        <div className="col-lg-6 col-sm-6 col-md-6 col-6  mt-3 text-center">
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "50%",backgroundColor:"aqua" }}>
                                     <i class="fa-solid fa-user"></i>

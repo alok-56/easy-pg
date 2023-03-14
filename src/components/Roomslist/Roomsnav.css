@@ -30,3 +30,6 @@
     border-radius: 5px;
     padding: 5px;
 } 
+#roomnav #search #btn:hover{
+    background-color: red;
+}

@@ -12,7 +12,7 @@ const Roomslist = () => {
     const [room, SetRoom] = useState('')
     const navigate = useNavigate();
     const [load, setLoad] = useState(true)
-    const [data,setData]=useState('')
+    const [data, setData] = useState('')
     useEffect(() => {
         AllRoom();
     }, [])
@@ -23,6 +23,7 @@ const Roomslist = () => {
         setLoad(false)
     }
     const search = async () => {
+        data.toLowerCase();
         if (data) {
             let result = await fetch(`https://easy-ser.vercel.app/room/searchroom/${data}`);
             result = await result.json();
@@ -45,7 +46,7 @@ const Roomslist = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 order-lg-first order-md-first order-sm-first order-last mt-2">
                             <div id="search">
-                                <span><input value={data} onChange={(e)=>setData(e.target.value)} type="text" placeholder="Enetr location/college/school"></input><span id="btn" onClick={search}><i  class="fa-sharp fa-solid fa-magnifying-glass"></i></span></span>
+                                <span><input value={data} onChange={(e) => setData(e.target.value)} type="text" placeholder="Enetr location/college/school"></input><span id="btn" onClick={search}><i class="fa-sharp fa-solid fa-magnifying-glass"></i></span></span>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-3 col-md-3 col-3 order-lg-last order-md-last order-sm-first mt-2 text-center">
@@ -69,7 +70,7 @@ const Roomslist = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    marginTop:"200px"
+                    marginTop: "200px"
                 }}>
                     <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
 

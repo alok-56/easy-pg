@@ -49,7 +49,7 @@ const Roomslist = () => {
                                 <span><input onChange={search} type="text" placeholder="Enetr location/college/school"></input><span id="btn"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></span></span>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-sm-3 col-md-3 col-3 order-lg-last order-md-last order-sm-first mt-2 text-center">
+                        <div className="col-lg-3 col-sm-3 col-md-3 col-3 order-lg-last order-md-last order-sm-first mt-3 text-center">
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "50%", backgroundColor: "aqua" }}>
                                     <i class="fa-solid fa-user"></i>

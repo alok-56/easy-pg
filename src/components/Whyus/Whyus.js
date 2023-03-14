@@ -5,7 +5,7 @@ import './Whyus.css';
 const Whyus = () => {
     return (
         <div id="why">
-            <div className="container mt-5">
+            <div className="container-fluid mt-5">
                 <div className="row">
                     <div className="col-lg-5 col-md-5 col-sm-12 col-12">
                         <img height={350} width={350} style={{ borderRadius: "5px" }} id="im" src={why}></img>

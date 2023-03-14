@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { SpinnerCircular } from 'spinners-react';
 import 'react-toastify/dist/ReactToastify.css';
+import { SpinnerRoundOutlined } from 'spinners-react';
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -53,7 +54,7 @@ function MyVerticallyCenteredModal(props) {
         productdata();
 
     }, []);
-    
+
     const productdata = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${params.id}`)
         data = await data.json();
@@ -272,6 +273,7 @@ const Roomsingle = () => {
     const [commonarea, setCommanarea] = useState('');
     const params = useParams();
     const [load, setLoad] = useState(true)
+    const [load1,setLoad1]=useState(true)
     useEffect(() => {
         Roomsingle();
     }, [])
@@ -306,6 +308,7 @@ const Roomsingle = () => {
         setAcroom(data.acroom);
         setFurniture(data.furniture);
         setCommanarea(data.commonarea);
+        setLoad1(false)
 
     }
     const [modalShow, setModalShow] = React.useState(false);
@@ -320,123 +323,129 @@ const Roomsingle = () => {
     }
     return (
         <div >
-            <div className='container mt-3'>
-                <div className='row'>
-                    <div id='singlerooms'>
-                        <div className='col-12'>
-                            <div className='row'>
-                                <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-                                    <Carousel slide={true}>
-                                        <Carousel.Item>
-                                            <img
-                                                className="d-block w-100"
-                                                src={b1}
-                                                alt="First slide"
-                                                style={{ height: "330px", borderRadius: "5px" }}
-                                            />
-                                        </Carousel.Item>
-                                        <Carousel.Item>
-                                            <img
-                                                className="d-block w-100"
-                                                src={b2}
-                                                alt="Second slide"
-                                                style={{ height: "330px", borderRadius: "5px" }}
-                                            />
-                                        </Carousel.Item>
-                                        <Carousel.Item>
-                                            <img
-                                                className="d-block w-100"
-                                                src={b1}
-                                                alt="Third slide"
-                                                style={{ height: "330px", borderRadius: "5px" }}
-                                            />
-                                        </Carousel.Item>
-                                    </Carousel>
-                                </div>
-                                <div className='col-lg-8 col-md-8 col-sm-12 col-12'>
-                                    <div className='row'>
-                                        <div className='col-12'>
-                                            <span style={{ fontWeight: "bold" }}>{roomname} / in {address} / {district}</span><br></br>
-                                            <span style={{ fontSize: "12px" }}>{dic}</span>
+            {
+                load1 ? <div style={{
+
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "200px"
+                }}>
+                    <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
+
+                </div> : <div><div className='container mt-3'>
+                    <div className='row'>
+                        <div id='singlerooms'>
+                            <div className='col-12'>
+                                <div className='row'>
+                                    <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
+                                        <Carousel slide={true}>
+                                            <Carousel.Item>
+                                                <img
+                                                    className="d-block w-100"
+                                                    src={b1}
+                                                    alt="First slide"
+                                                    style={{ height: "330px", borderRadius: "5px" }}
+                                                />
+                                            </Carousel.Item>
+                                            <Carousel.Item>
+                                                <img
+                                                    className="d-block w-100"
+                                                    src={b2}
+                                                    alt="Second slide"
+                                                    style={{ height: "330px", borderRadius: "5px" }}
+                                                />
+                                            </Carousel.Item>
+                                            <Carousel.Item>
+                                                <img
+                                                    className="d-block w-100"
+                                                    src={b1}
+                                                    alt="Third slide"
+                                                    style={{ height: "330px", borderRadius: "5px" }}
+                                                />
+                                            </Carousel.Item>
+                                        </Carousel>
+                                    </div>
+                                    <div className='col-lg-8 col-md-8 col-sm-12 col-12'>
+                                        <div className='row'>
+                                            <div className='col-12'>
+                                                <span style={{ fontWeight: "bold" }}>{roomname} / in {address} / {district}</span><br></br>
+                                                <span style={{ fontSize: "12px" }}>{dic}</span>
+                                                <hr></hr>
+                                            </div>
+                                            <div className='col-12'>
+                                                <div className='row'>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Price/bed</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{siglebedprice}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>price/room</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{fullroomprice}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Electric Charges</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{electricCharge}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Bathroom</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{bathroom}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <hr></hr>
-                                        </div>
-                                        <div className='col-12'>
-                                            <div className='row'>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Price/bed</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{siglebedprice}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>price/room</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{fullroomprice}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Electric Charges</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{electricCharge}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Bathroom</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{bathroom}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr></hr>
-                                        <div className='col-12'>
-                                            <div className='row'>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>AC Rooms</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{acroom}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Parking</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{parking}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Power Backup</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{powerbackup}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Preferred Tenants</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{preferred}</span>
+                                            <div className='col-12'>
+                                                <div className='row'>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>AC Rooms</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{acroom}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Parking</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{parking}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Power Backup</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{powerbackup}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Preferred Tenants</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{preferred}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <hr></hr>
-                                        <div className='col-12'>
-                                            <div className='row'>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Available for</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{available}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Total Beds</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{totalbed}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Room type</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{roomtype}</span>
-                                                </div>
-                                                <div className='col-3'>
-                                                    <span style={{ fontSize: "13px" }}>Cooking</span><br></br>
-                                                    <span style={{ fontWeight: "bold" }}>{cooking}</span>
+                                            <hr></hr>
+                                            <div className='col-12'>
+                                                <div className='row'>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Available for</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{available}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Total Beds</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{totalbed}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Room type</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{roomtype}</span>
+                                                    </div>
+                                                    <div className='col-3'>
+                                                        <span style={{ fontSize: "13px" }}>Cooking</span><br></br>
+                                                        <span style={{ fontWeight: "bold" }}>{cooking}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <hr></hr>
-                                        <div className='col-12 text-center'>
-                                            <div>
-                                                <button className='btn btn-danger' onClick={fun}>Book now</button>
+                                            <hr></hr>
+                                            <div className='col-12 text-center'>
+                                                <div>
+                                                    <button className='btn btn-danger' onClick={fun}>Book now</button>
+                                                </div>
+
+                                                <MyVerticallyCenteredModal
+                                                    show={modalShow}
+                                                    onHide={() => setModalShow(false)}
+                                                />
                                             </div>
-
-                                            <MyVerticallyCenteredModal
-                                                show={modalShow}
-                                                onHide={() => setModalShow(false)}
-                                            />
-
-
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -444,100 +453,103 @@ const Roomsingle = () => {
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <div className='container mt-3'>
-                    <h3>House Rules</h3>
-                    <div className='row'>
-                        <div className='col-12'>
+                    <div>
+                        <div className='container mt-3'>
+                            <h3>House Rules</h3>
                             <div className='row'>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Gate close time</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{closingtime}</span>
+                                <div className='col-12'>
+                                    <div className='row'>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Gate close time</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{closingtime}</span>
+                                        </div>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Visitor Entery</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{visitor}</span>
+                                        </div>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Oppsite Gender</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{oppsiteGender}</span>
+                                        </div>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Smoking</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{smoking}</span>
+                                        </div>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Loud music</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{loudMusic}</span>
+                                        </div>
+                                        <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                            <span style={{ fontSize: "10px" }}>Party</span><br></br>
+                                            <span style={{ fontSize: "13px", fontWeight: "bold" }}>{party}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Visitor Entery</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{visitor}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='container mt-3'>
+                            <h3>Furniture</h3>
+                            <div className='row'>
+                                <div className='col-12 d-flex justify-content-between'>
+                                    {
+                                        furniture && furniture.length > 0
+                                            ? furniture.map((item) => (
+                                                <div className='row'>
+                                                    <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                                        <span style={{ fontSize: "15px", fontWeight: "bold" }}>{item}</span><br></br>
+                                                    </div>
+                                                </div>
+                                            )) : null
+
+                                    }
                                 </div>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Oppsite Gender</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{oppsiteGender}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='container mt-3'>
+                            <h3>Common Area and Amenities</h3>
+                            <div className='row'>
+                                <div className='col-12 d-flex justify-content-between'>
+                                    {
+                                        commonarea && commonarea.length > 0 ?
+                                            commonarea.map((item) => (
+
+                                                <div className='row'>
+                                                    <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
+                                                        <span style={{ fontSize: "15px", fontWeight: "bold" }}>{item}</span><br></br>
+                                                    </div>
+                                                </div>
+
+
+                                            )) : null
+                                    }
                                 </div>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Smoking</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{smoking}</span>
-                                </div>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Loud music</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{loudMusic}</span>
-                                </div>
-                                <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                    <span style={{ fontSize: "10px" }}>Party</span><br></br>
-                                    <span style={{ fontSize: "13px", fontWeight: "bold" }}>{party}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='container mt-3'>
+                            <h4 style={{ color: "red" }}>Info For you</h4>
+                            <div className='row'>
+                                <div className='col-lg-6 col-sm-12 col-md-6 col-12'>
+                                    <ul>
+                                        <li>100% refund after 24 hours of cancellation</li>
+                                        <li>All the details of owner will send After payment (onwer number,address,google map location)</li>
+                                        <li>For more info about pg contact us</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div className='container mt-3'>
-                    <h3>Furniture</h3>
-                    <div className='row'>
-                        <div className='col-12 d-flex justify-content-between'>
-                            {
-                                furniture && furniture.length > 0
-                                    ? furniture.map((item) => (
-                                        <div className='row'>
-                                            <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                                <span style={{ fontSize: "15px", fontWeight: "bold" }}>{item}</span><br></br>
-                                            </div>
-                                        </div>
-                                    )) : null
-
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className='container mt-3'>
-                    <h3>Common Area and Amenities</h3>
-                    <div className='row'>
-                        <div className='col-12 d-flex justify-content-between'>
-                            {
-                                commonarea && commonarea.length > 0 ?
-                                    commonarea.map((item) => (
-
-                                        <div className='row'>
-                                            <div className='col-lg-2 col-md-2 col-sm-3 col-3'>
-                                                <span style={{ fontSize: "15px", fontWeight: "bold" }}>{item}</span><br></br>
-                                            </div>
-                                        </div>
+            }
 
 
-                                    )) : null
-                            }
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className='container mt-3'>
-                    <h4 style={{ color: "red" }}>Info For you</h4>
-                    <div className='row'>
-                        <div className='col-lg-6 col-sm-12 col-md-6 col-12'>
-                            <ul>
-                                <li>100% refund after 24 hours of cancellation</li>
-                                <li>All the details of owner will send After payment (onwer number,address,google map location)</li>
-                                <li>For more info about pg contact us</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }

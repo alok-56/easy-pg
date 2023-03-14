@@ -2,3 +2,9 @@
 #faq{
     font-family: 'Montserrat', sans-serif;
 }
+@media(max-width:380px){
+    .font{
+        font-size: 12px;
+        font-weight: bold;
+    }
+}

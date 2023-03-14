@@ -119,12 +119,12 @@ const Faq = () => {
                     <div className="col-12">
                         <span className="font" >Q:How can we post room on site ?</span>
                         {
-                            show4 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow4(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow4(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
+                            show5 ? <span style={{ marginLeft: "15px" }} onClick={() => SetShow5(false)}><i style={{ fontSize: "20px" }} class="fa-solid fa-xmark"></i></span> : <span onClick={() => SetShow5(true)} style={{ marginLeft: "15px" }}><i style={{ fontSize: "20px" }} class="fa-solid fa-plus"></i></span>
                         }
                     </div>
                     <div className="col-12">
                         {
-                            show4 ? <p style={{
+                            show5 ? <p style={{
                                 padding: "2px",
                                 fontSize: "13px",
                                 fontWeight: "bold",

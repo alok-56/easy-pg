@@ -18,6 +18,7 @@ const Transition = () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/userbookinglist/${params.id}`);
         data = await data.json();
         setData(data);
+        console.log(data[0])
         setLoads(false)
     }
 

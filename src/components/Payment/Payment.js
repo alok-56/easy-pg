@@ -12,7 +12,7 @@ const Payment = () => {
     const [status, setStatus] = useState("cancelled");
     const [id, setBookid] = useState();
     const [email, setEmail] = useState();
-    const [loads,setLoads]=useState(true)
+    const [loads, setLoads] = useState(true)
 
     const navigate = useNavigate()
 
@@ -124,7 +124,7 @@ const Payment = () => {
     }
 
     const update = async (id) => {
-        let pay="paid";
+        let pay = "paid";
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
             body: JSON.stringify({ id, pay }),
@@ -153,12 +153,13 @@ const Payment = () => {
     }
 
     const Paynow = async (price, id, status, book) => {
+        console.log(id)
         setLoads(true)
         if (status === "cancelled") {
             navigate('/rooms/single/' + id)
         }
         else {
-            
+
             let result = await fetch(`https://easy-ser.vercel.app/payment/orders`, {
                 method: "post",
                 body: JSON.stringify({ price }),
@@ -191,52 +192,52 @@ const Payment = () => {
                 }}>
                     <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
 
-                </div> :<div className="container mt-3 text-center">
+                </div> : <div className="container mt-3 text-center">
 
-{
-    date && date.length > 0 ?
-        date.slice(0).reverse().map((item) => (
-            <div style={{ backgroundColor: "#fff", padding: "5px", marginTop: "10px", border: "1px solid black" }} >
-                <div className="row">
-                    <div className="col-lg-5 col-md-5 col-sm-12 col-12">
-                        <div style={{ display: "flex", justifyContent: "space-around" }}>
-                            <img width={100} className="img-fluid" src={head} alt="Rooms"></img>
-                            <div>
-                                <span style={{ fontSize: "12px" }}>{item.name}, {item.address}, {item.district}</span><br></br>
-                                {/* <span style={{ fontSize: "12px" }}>Paid on 2 nov 2022</span><br></br> */}
-                                <span style={{ fontSize: "12px" }}>Ownwer id : {item.sellerId}</span><br></br>
-                                {/* <span style={{ fontSize: "12px" }}>Transition id : {item.transitionId}</span><br></br> */}
-                                <span style={{ fontSize: "12px", fontWeight: "bold" }}>Booking id: {item._id}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-2 col-md-2 col-sm-6 col-6 mt-2 text-center">
-                        <div>
-                            <span style={{ fontWeight: "bold" }}>Paid Total : <span style={{ fontSize: "10px" }}> {item.price}</span></span><br></br>
-                            {/* <span style={{ fontWeight: "bold" }}>Month : <span style={{ fontSize: "10px" }}>July</span></span><br></br> */}
-                            {/* <span style={{ fontWeight: "bold" }}>Booked Till : <span style={{ fontSize: "10px" }}>5 July</span></span> */}
-                            <span style={{ fontWeight: "bold" }}>last date: <span style={{ fontSize: "10px" }}>8 July</span></span>
-                        </div>
-                    </div>
-                    <div className="col-lg-5 col-md-5 col-sm-6 col-6 mt-2">
-                        <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
-                        {
-                            // item.status === 'cancelled' ? null : 
-                            <Button variant="outline-danger" onClick={() => Paynow(item.price, item.productId, item.status, item._id)}>Pay now</Button>
+                    {
+                        date && date.length > 0 ?
+                            date.slice(0).reverse().map((item) => (
+                                <div style={{ backgroundColor: "#fff", padding: "5px", marginTop: "10px", border: "1px solid black" }} >
+                                    <div className="row">
+                                        <div className="col-lg-5 col-md-5 col-sm-12 col-12">
+                                            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                                <img width={100} className="img-fluid" src={head} alt="Rooms"></img>
+                                                <div>
+                                                    <span style={{ fontSize: "12px" }}>{item.name}, {item.address}, {item.district}</span><br></br>
+                                                    {/* <span style={{ fontSize: "12px" }}>Paid on 2 nov 2022</span><br></br> */}
+                                                    <span style={{ fontSize: "12px" }}>Ownwer id : {item.sellerId}</span><br></br>
+                                                    {/* <span style={{ fontSize: "12px" }}>Transition id : {item.transitionId}</span><br></br> */}
+                                                    <span style={{ fontSize: "12px", fontWeight: "bold" }}>Booking id: {item._id}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-2 col-md-2 col-sm-6 col-6 mt-2 text-center">
+                                            <div>
+                                                <span style={{ fontWeight: "bold" }}>Paid Total : <span style={{ fontSize: "10px" }}> {item.price}</span></span><br></br>
+                                                {/* <span style={{ fontWeight: "bold" }}>Month : <span style={{ fontSize: "10px" }}>July</span></span><br></br> */}
+                                                {/* <span style={{ fontWeight: "bold" }}>Booked Till : <span style={{ fontSize: "10px" }}>5 July</span></span> */}
+                                                <span style={{ fontWeight: "bold" }}>last date: <span style={{ fontSize: "10px" }}>8 July</span></span>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-5 col-md-5 col-sm-6 col-6 mt-2">
+                                            <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
+                                            {
+                                                // item.status === 'cancelled' ? null : 
+                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id)}>Pay now</Button>
 
-                        }
+                                            }
 
-                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            )) : <h1>No Booking</h1>
+                    }
+
                 </div>
-            </div>
-
-        )) : <h1>No Booking</h1>
-}
-
-</div>
 
             }
-            
+
 
 
         </div>

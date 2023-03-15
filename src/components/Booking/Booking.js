@@ -136,7 +136,7 @@ const Booking = () => {
                                                 <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button>
                                                 <Button
                                                     variant="outline-danger" className="mt-lg-0 mt-md-0 mt-sm-1 mt-1"
-                                                    onClick={() => navigate('/Ownerinfo/' + item.orderId)}
+                                                    onClick={() => navigate('/Ownerinfo/' + item._id)}
                                                 >Order info</Button>{' '}
                                             </div>
                                         </div>

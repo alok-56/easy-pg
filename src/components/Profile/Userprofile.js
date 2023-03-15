@@ -48,7 +48,8 @@ function MyVerticallyCenteredModal(props) {
         SetEmail(data.email);
         SetNumber(data.number);
         SetGender(data.gender);
-        SetProfession(data.profession)
+        SetProfession(data.profession);
+        SetImages(data.images)
         
     }
     const updateuser = async () => {

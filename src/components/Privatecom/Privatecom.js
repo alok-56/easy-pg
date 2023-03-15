@@ -6,7 +6,7 @@ const Privatecom=()=>{
     return(
         <div>
             {
-                user?<Outlet></Outlet>:<Navigate to='/signin'></Navigate>
+                user?<Outlet></Outlet>:<Navigate to='/Signin'></Navigate>
             }
 
         </div>

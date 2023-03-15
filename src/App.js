@@ -28,10 +28,10 @@ function App() {
         <Routes>
           <Route element={<Privatecom></Privatecom>}>
             <Route path='/profile/booking/:id' element={<Booking></Booking>}></Route>
+            <Route path='/profile' element={<Profile></Profile>}></Route>
             <Route path='/profile/cancel/:id' element={<Cancelled></Cancelled>}></Route>
             <Route path='/profile/payment/:id' element={<Payment></Payment>}></Route>
             <Route path='/profile/Transition/:id' element={<Transition></Transition>}></Route>
-            <Route path='/profile' element={<Profile></Profile>}></Route>
             <Route path='/loc' element={<Map></Map>}></Route>
             <Route path='/Success/:id' element={<Success></Success>}></Route>
             <Route path='/Ownerinfo/:id' element={<Ownerinfo></Ownerinfo>}></Route>

@@ -19,11 +19,12 @@ const Ownerinfo = () => {
     const Owenerinfo = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/bookinglist/${params.id}`);
         data = await data.json();
+        console.log(data)
         if (data) {
             SetOwnername(data.ownername);
             setOwnerEmail(data.ownerEmail);
             setOwnerNumber(data.ownerNumber);
-            setAddress(data.address);
+            setAddress(data.add);
             setOwnerId(data.sellerId);
             setBookingId(data._id);
             setRoomid(data.productId)

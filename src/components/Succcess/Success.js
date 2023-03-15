@@ -18,36 +18,33 @@ const Success = () => {
     const [ownerId, setOwnerId] = useState('');
     const [price, setPrice] = useState('');
     const [roomid, SetRoomid] = useState('');
-    const [load,setLoad]=useState(true)
+    const [load, setLoad] = useState(true)
 
     useEffect(() => {
         Successpayment();
     }, [])
 
     const Successpayment = async () => {
+        setLoad(false)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/bookinglist/${params.id}`);
         data = await data.json();
-        console.log(data)
-        if (data) {
-            setName(data.name)
-            setEmail(data.email);
-            setBookingId(data._id);
-            setTransitionId(data.transitionId)
-            SetOwnername(data.ownername);
-            setOwnerEmail(data.ownerEmail);
-            setOwnerNumber(data.ownerNumber);
-            setAddress(data.address);
-            setOwnerId(data.sellerId);
-            setPrice(data.price)
-            SetRoomid(data.productId)
-            setLoad(false)
-           
-        }
+        setName(data.name)
+        setEmail(data.email);
+        setBookingId(data._id);
+        setTransitionId(data.transitionId)
+        SetOwnername(data.ownername);
+        setOwnerEmail(data.ownerEmail);
+        setOwnerNumber(data.ownerNumber);
+        setAddress(data.address);
+        setOwnerId(data.sellerId);
+        setPrice(data.price)
+        SetRoomid(data.productId)
+
     }
     return (
         <div id="pay_head">
             {
-                  load ? <div style={{
+                load ? <div style={{
 
                     display: "flex",
                     justifyContent: "center",
@@ -55,48 +52,48 @@ const Success = () => {
                     marginTop: "200px"
                 }}>
                     <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
-                    </div>: <div className="container">
-                <div className="row">
-                    <div className="col-12 mt-5 text-center">
-                        <div id="payment_head">
-                            <div id="logo_payment">
-                                <i class="fa-solid fa-check" style={{ fontSize: "45px", color: "#fff", backgroundColor: "green", borderRadius: "50px", padding: "3px", marginTop: "10px" }}></i><br></br>
-                                <span style={{ fontSize: "25px", color: "green" }}>Payment Successful</span>
-                            </div>
-                            <div id="detail" className="mt-3" >
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Name
-                                    </span>
-                                    <span>
-                                        {name}
-                                    </span>
+                </div> : <div className="container">
+                    <div className="row">
+                        <div className="col-12 mt-5 text-center">
+                            <div id="payment_head">
+                                <div id="logo_payment">
+                                    <i class="fa-solid fa-check" style={{ fontSize: "45px", color: "#fff", backgroundColor: "green", borderRadius: "50px", padding: "3px", marginTop: "10px" }}></i><br></br>
+                                    <span style={{ fontSize: "25px", color: "green" }}>Payment Successful</span>
                                 </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Email
-                                    </span>
-                                    <span>
-                                        {email}
-                                    </span>
-                                </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Booking id
-                                    </span>
-                                    <span>
-                                        {bookingId}
-                                    </span>
-                                </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Room id
-                                    </span>
-                                    <span>
-                                        {roomid}
-                                    </span>
-                                </div>
-                                {/* <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                <div id="detail" className="mt-3" >
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Name
+                                        </span>
+                                        <span>
+                                            {name}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Email
+                                        </span>
+                                        <span>
+                                            {email}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Booking id
+                                        </span>
+                                        <span>
+                                            {bookingId}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Room id
+                                        </span>
+                                        <span>
+                                            {roomid}
+                                        </span>
+                                    </div>
+                                    {/* <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
                                     <span>
                                         Transaction id
                                     </span>
@@ -104,68 +101,70 @@ const Success = () => {
                                         {transitionId}
                                     </span>
                                 </div> */}
-                                <div className="mt-2 d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        Amount
-                                    </span>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        {price}
-                                    </span>
+                                    <div className="mt-2 d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span style={{ fontWeight: "bold" }}>
+                                            Amount
+                                        </span>
+                                        <span style={{ fontWeight: "bold" }}>
+                                            {price}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="logo_payment">
-                                <span style={{ fontSize: "25px", color: "green" }}>Owner Details</span>
-                            </div>
-                            <div id="detail" className="mt-3" >
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Name
-                                    </span>
-                                    <span>
-                                        {ownername}
-                                    </span>
+                                <div id="logo_payment">
+                                    <span style={{ fontSize: "25px", color: "green" }}>Owner Details</span>
                                 </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Email
-                                    </span>
-                                    <span>
-                                        {ownerEmail}
-                                    </span>
+                                <div id="detail" className="mt-3" >
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Name
+                                        </span>
+                                        <span>
+                                            {ownername}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Email
+                                        </span>
+                                        <span>
+                                            {ownerEmail}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span style={{ fontWeight: "bold" }}>
+                                            Number
+                                        </span>
+                                        <span style={{ fontWeight: "bold" }}>
+                                            {ownerNumber}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            address
+                                        </span>
+                                        <span>
+                                            {address}
+                                        </span>
+                                    </div>
+                                    <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
+                                        <span>
+                                            Owner id
+                                        </span>
+                                        <span>
+                                            {ownerId}
+                                        </span>
+                                    </div>
+
                                 </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        Number
-                                    </span>
-                                    <span style={{ fontWeight: "bold" }}>
-                                        {ownerNumber}
-                                    </span>
-                                </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        address
-                                    </span>
-                                    <span>
-                                        {address}
-                                    </span>
-                                </div>
-                                <div className=" d-flex justify-content-between" style={{ fontSize: "12px" }}>
-                                    <span>
-                                        Owner id
-                                    </span>
-                                    <span>
-                                        {ownerId}
-                                    </span>
+                                <div>
+                                    <button className="btn btn-danger m-2"
+                                        onClick={() => navigate('/loc')}
+                                        disabled>Owner location</button>
+                                    <button className="btn btn-danger"
+                                        onClick={() => navigate('/profile')}
+                                    >My booking</button>
                                 </div>
 
-                            </div>
-                            <div>
-                                <button className="btn btn-danger m-2"
-                                    onClick={() => navigate('/loc')}
-                                    disabled>Owner location</button>
-                                <button className="btn btn-danger"
-                                    onClick={() => navigate('/profile')}
-                                >My booking</button>
                             </div>
 
                         </div>
@@ -174,10 +173,8 @@ const Success = () => {
 
                 </div>
 
-            </div>
-
             }
-           
+
         </div>
     )
 }

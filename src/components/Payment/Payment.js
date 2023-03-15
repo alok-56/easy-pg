@@ -97,7 +97,7 @@ const Payment = () => {
 
 
     const handlerazarpay = async (data, id, book) => {
-        setLoads(true)
+        setLoads(false)
         const options = {
             key: 'rzp_test_MtraH0q566XjUb',
             amount: Number(data.price) * 100,
@@ -153,7 +153,6 @@ const Payment = () => {
     }
 
     const Paynow = async (price, id, status, book) => {
-        console.log(id)
         setLoads(true)
         if (status === "cancelled") {
             navigate('/rooms/single/' + id)

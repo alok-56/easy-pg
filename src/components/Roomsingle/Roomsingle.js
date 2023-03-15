@@ -61,14 +61,14 @@ function MyVerticallyCenteredModal(props) {
         console.log(data)
         setRoomname(data.roomname);
         setImg(data.img);
-        setSellerId(data.sellerId);
+        setSellerId(data.SellerId);
         setSiglebedprice(data.Siglebedprice);
         setFullroomprice(data.Fullroomprice)
         setState(data.state);
         setDistrict(data.district);
         setOwnername(data.name);
         setOwnerEmail(data.email);
-        setOwnernNumber(data.Number)
+        setOwnernNumber(data.number)
         setAdd(data.address)
     }
     var date = new Date();
@@ -271,7 +271,7 @@ const Roomsingle = () => {
     const [commonarea, setCommanarea] = useState('');
     const params = useParams();
     const [load, setLoad] = useState(true)
-    const [load1,setLoad1]=useState(true)
+    const [load1, setLoad1] = useState(true)
     useEffect(() => {
         Roomsingle();
     }, [])

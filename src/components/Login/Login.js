@@ -16,6 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const signin = async () => {
+        setLoading(true)
         let result = await fetch(`https://easy-ser.vercel.app/Aut/signin`, {
             method: 'post',
             body: JSON.stringify({ email, password }),
@@ -24,12 +25,13 @@ const Login = () => {
             }
         })
         result = await result.json();
-        console.log(result)
-        if (result.email == email && result.password == password) {
+        if (result) {
+            setLoading(false)
             localStorage.setItem('user', JSON.stringify(result))
             navigate('/');
         }
         else{
+            setLoading(false)
             toast("Wrong detail");
         }
            

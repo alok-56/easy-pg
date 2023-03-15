@@ -61,7 +61,7 @@ function MyVerticallyCenteredModal(props) {
         console.log(data)
         setRoomname(data.roomname);
         setImg(data.img);
-        setSellerId(data._id);
+        setSellerId(data.sellerId);
         setSiglebedprice(data.Siglebedprice);
         setFullroomprice(data.Fullroomprice)
         setState(data.state);
@@ -79,7 +79,6 @@ function MyVerticallyCenteredModal(props) {
 
 
     const handlerazarpay = async (data) => {
-        setLoad(true)
         const options = {
             key: 'rzp_test_MtraH0q566XjUb',
             amount: Number(data.price) * 100,
@@ -167,7 +166,6 @@ function MyVerticallyCenteredModal(props) {
             handlerazarpay(result.data)
         }
         else {
-            toast(result.message)
             toast("Empty Details")
         }
 

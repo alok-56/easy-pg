@@ -16,7 +16,7 @@ const Booking = () => {
     const [book, setBook] = useState('')
     const navigate = useNavigate()
     const params = useParams()
-    const [loads,setLoads]=useState(true)
+    const [loads, setLoads] = useState(true)
 
     useEffect(() => {
         getbook();
@@ -126,7 +126,7 @@ const Booking = () => {
                                                     {/* <span style={{ marginLeft: "20px",color:"red",fontWeight:"bold", }}>Owner Info</span> */}
                                                     {/* <Button
                                 variant="outline-danger"  style={{ marginLeft: "20px" }} onClick={cancel}>Order info</Button>{' '} */}
-                                                    <span style={{ fontWeight: "bold", marginLeft:"0px",fontSize:"15px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold" }}>{item.status}</span><br></br>
+                                                    <span style={{ fontWeight: "bold", marginLeft: "0px", fontSize: "15px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold" }}>{item.status}</span><br></br>
 
                                                 </div>
                                             </div>

@@ -68,7 +68,8 @@ const Signup = () => {
             }
         }
         else {
-            alert("wrong otp")
+            toast("wrong otp")
+            setLoading(false)
         }
     }
     return (
@@ -86,11 +87,11 @@ const Signup = () => {
                                     </div>
                                     <div id="info">
                                         <div id="info_head">
-                                            <input type="text" value={veri} onChange={(e) => setVeri(e.target.value)}></input>
+                                            <input type="text" style={{textAlign:"center",borderRadius:"5px",padding:"5px"}} value={veri} onChange={(e) => setVeri(e.target.value)}></input>
                                         </div>
 
 
-                                        <button className="btn btn-primary mt-3 w-100" style={{ color: "#fff", fontWeight: "bold", textDecoration: "none" }} onClick={fun}>
+                                        <button className="btn btn-primary mt-2 w-100" style={{ color: "#fff", fontWeight: "bold", textDecoration: "none" }} onClick={fun}>
                                             {
                                                 loading ? <div style={{ textAlign: "center" }}>
                                                     <SpinnerRoundOutlined size={30} thickness={100} speed={133} color="#36ad47" />

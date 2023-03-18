@@ -29,6 +29,7 @@ const Roomslist = () => {
         if (data) {
             let result = await fetch(`https://easy-ser.vercel.app/room/searchroom/${dat}`);
             result = await result.json();
+            console.log(result)
             if (result) {
                 SetRoom(result)
                 setLoad(false)

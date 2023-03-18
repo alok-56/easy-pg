@@ -52,6 +52,7 @@ const Booking = () => {
                 if (data) {
                     setRefundid(data.id);
                     setRefundstatus(data.status)
+                    console.log(refundid, refundstatus)
                     let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
                         body: JSON.stringify({ id, refundid, refundstatus }),

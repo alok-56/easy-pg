@@ -162,6 +162,7 @@ function MyVerticallyCenteredModal(props) {
             }
         });
         result = await result.json();
+        console.log(result)
         if (result.code === 200) {
             handlerazarpay(result.data)
         }

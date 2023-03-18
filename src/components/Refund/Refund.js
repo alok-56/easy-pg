@@ -19,13 +19,14 @@ const Refund = () => {
     const getBook = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/bookinglist/${params.id}`)
         data = await data.json()
+        console.log(data)
         if (data) {
             refundStatus(data.refundid, data.transitionId[data.transitionId.length - 1])
         }
 
     }
     const refundStatus = async (id, pay) => {
-        let data = await fetch(`https://easy-ser.vercel.app/payment//refund/status`, {
+        let data = await fetch(`https://easy-ser.vercel.app/payment/fetchrefund`, {
             method: "post",
             body: JSON.stringify({ id, pay }),
             headers: {
@@ -33,6 +34,7 @@ const Refund = () => {
             }
         })
         data = await data.json();
+        console.log(data)
         if (data) {
             setRefundid(data.id);
             setPaymentid(data.payment_id)

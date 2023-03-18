@@ -17,10 +17,7 @@ const Booking = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [loads, setLoads] = useState(true)
-    const [refund, setRefund] = useState(true);
-    const [refundstatus, setRefundstatus] = useState('')
-    const [refundid, setRefundid] = useState('')
-
+    
     useEffect(() => {
         getbook();
     }, [])
@@ -50,9 +47,9 @@ const Booking = () => {
                     }
                 })
                 data = await data.json();
-                setRefundid(data.id);
-                setRefundstatus(data.status);
                 if (data.status && data.id) {
+                    let refundid=data.id;
+                    let refundstatus=data.status;
                     let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
                         body: JSON.stringify({ id, refundid, refundstatus }),
@@ -63,7 +60,8 @@ const Booking = () => {
                     refund = await refund.json();
                     console.log(refund)
                     if (refund.modifiedCount > 0) {
-                        toast("refund process started")
+                        toast("refund process started");
+                        getbook()
                     }
                 }
                 else {

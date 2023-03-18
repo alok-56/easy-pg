@@ -51,10 +51,8 @@ const Booking = () => {
                 })
                 data = await data.json();
                 setRefundid(data.id);
-                    setRefundstatus(data.status);
-                console.log(data)
-                if (data) {
-                    console.log(refundid, refundstatus)
+                setRefundstatus(data.status);
+                if (data.status && data.id) {
                     let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
                         body: JSON.stringify({ id, refundid, refundstatus }),
@@ -67,11 +65,10 @@ const Booking = () => {
                     if (refund.modifiedCount > 0) {
                         toast("refund process started")
                     }
-                    else {
-                        toast("refund process declined")
-                    }
                 }
-
+                else {
+                    toast("refund process declined")
+                }
 
             }
             else {

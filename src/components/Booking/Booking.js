@@ -36,6 +36,7 @@ const Booking = () => {
             toast("Your Booking is already cancelled")
         }
         else {
+
             var canceldate = new Date();
             var Difference_In_Time = canceldate.getTime() - time;
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
@@ -49,9 +50,10 @@ const Booking = () => {
                     }
                 })
                 data = await data.json();
+                setRefundid(data.id);
+                    setRefundstatus(data.status);
+                console.log(data)
                 if (data) {
-                    setRefundid(data.id);
-                    setRefundstatus(data.status)
                     console.log(refundid, refundstatus)
                     let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
@@ -61,8 +63,12 @@ const Booking = () => {
                         }
                     })
                     refund = await refund.json();
-                    if (refund) {
+                    console.log(refund)
+                    if (refund.modifiedCount > 0) {
                         toast("refund process started")
+                    }
+                    else {
+                        toast("refund process declined")
                     }
                 }
 

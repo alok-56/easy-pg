@@ -17,6 +17,9 @@ const Booking = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [loads, setLoads] = useState(true)
+    const [refund, setRefund] = useState(true);
+    const [refundstatus, setRefundstatus] = useState('')
+    const [refundid, setRefundid] = useState('')
 
     useEffect(() => {
         getbook();
@@ -38,16 +41,29 @@ const Booking = () => {
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
             console.log(Difference_In_Days)
             if (Difference_In_Days <= 1) {
-                // let data=await fetch(`http://localhost:4500/payment/refund`,{
-                //     method:"post",
-                //     body:JSON.stringify({price,payment}),
-                //     headers:{
-                //         'content-Type':'application/json'
-                //     }
-                // })
-                // data=await data.json();
-                // console.log(data)
-                toast("Refund policy started")
+                let data = await fetch(`https://easy-ser.vercel.app/payment/refund`, {
+                    method: "post",
+                    body: JSON.stringify({ price, payment }),
+                    headers: {
+                        'content-Type': 'application/json'
+                    }
+                })
+                data = await data.json();
+                if (data) {
+                    setRefundid(data.id);
+                    setRefundstatus(data.status)
+                    let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
+                        method: "put",
+                        body: JSON.stringify({ id, refundid, refundstatus }),
+                        headers: {
+                            'content-Type': 'application/json'
+                        }
+                    })
+                    refund = await refund.json();
+                    if (refund) {
+                        toast("refund process started")
+                    }
+                }
 
 
             }
@@ -125,15 +141,17 @@ const Booking = () => {
                                                     <span style={{ marginLeft: "30px" }}><span style={{ fontWeight: "bold", color: "red", fontSize: "15px" }}>Rs : </span>{item.price}</span><br></br>
                                                     {/* <span style={{ marginLeft: "20px",color:"red",fontWeight:"bold", }}>Owner Info</span> */}
                                                     {/* <Button
-                                variant="outline-danger"  style={{ marginLeft: "20px" }} onClick={cancel}>Order info</Button>{' '} */}
+                                                        variant="outline-danger"  style={{ marginLeft: "20px" }} onClick={cancel}>Order info</Button>{' '} */}
                                                     <span style={{ fontWeight: "bold", marginLeft: "0px", fontSize: "15px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold" }}>{item.status}</span><br></br>
 
                                                 </div>
                                             </div>
                                             <div className="col-lg-5 col-md-5 col-sm-7 col-7 mt-1">
                                                 {/* <span style={{ fontWeight: "bold" }}>Status:</span><span style={{ color: "red", fontWeight: "bold" }}>Paid</span><br></br> */}
-
-                                                <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button>
+                                                {
+                                                    item.refundstatus ? <Button variant="outline-danger" onClick={() => navigate('/Refund/' + item._id)} >Refund Status</Button> : <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button>
+                                                }
+                                                {/* <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button> */}
                                                 <Button
                                                     variant="outline-danger" className="mt-lg-0 mt-md-0 mt-sm-1 mt-1"
                                                     onClick={() => navigate('/Ownerinfo/' + item._id)}

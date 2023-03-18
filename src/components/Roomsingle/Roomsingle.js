@@ -107,7 +107,6 @@ function MyVerticallyCenteredModal(props) {
     const postbooking = async (db) => {
         let transitionId = db.data.payment_id;
         let orderId = db.data.order_id;
-        navigate('/Success/' + orderId)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/postbooking`, {
             method: "post",
             body: JSON.stringify({
@@ -118,6 +117,9 @@ function MyVerticallyCenteredModal(props) {
             }
         })
         data = await data.json();
+        if (data) {
+            navigate('/profile/booking/' + usersId)
+        }
     }
 
     const sendEmail = async () => {

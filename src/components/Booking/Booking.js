@@ -17,7 +17,7 @@ const Booking = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [loads, setLoads] = useState(true)
-    
+
     useEffect(() => {
         getbook();
     }, [])
@@ -33,12 +33,12 @@ const Booking = () => {
             toast("Your Booking is already cancelled")
         }
         else {
-
             var canceldate = new Date();
             var Difference_In_Time = canceldate.getTime() - time;
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
             console.log(Difference_In_Days)
             if (Difference_In_Days <= 1) {
+                setLoads(true)
                 let data = await fetch(`https://easy-ser.vercel.app/payment/refund`, {
                     method: "post",
                     body: JSON.stringify({ price, payment }),
@@ -48,8 +48,8 @@ const Booking = () => {
                 })
                 data = await data.json();
                 if (data.status && data.id) {
-                    let refundid=data.id;
-                    let refundstatus=data.status;
+                    let refundid = data.id;
+                    let refundstatus = data.status;
                     let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
                         body: JSON.stringify({ id, refundid, refundstatus }),
@@ -60,11 +60,13 @@ const Booking = () => {
                     refund = await refund.json();
                     console.log(refund)
                     if (refund.modifiedCount > 0) {
+                        setLoads(false)
                         toast("refund process started");
                         getbook()
                     }
                 }
                 else {
+                    setLoads(false)
                     toast("refund process declined")
                 }
 

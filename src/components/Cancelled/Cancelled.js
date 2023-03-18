@@ -11,7 +11,7 @@ const Cancelled = () => {
     const params = useParams()
     const [cancel, SetCancel] = useState('')
     const [status, setStatus] = useState()
-    const [loads,setLoads]=useState(true);
+    const [loads, setLoads] = useState(true);
 
     useEffect(() => {
         CancelBook();
@@ -70,15 +70,15 @@ const Cancelled = () => {
 
                             ))
                             : <span>Not Yet cancelled</span>
-                            
+
 
                     }
-                    </div>
+                </div>
             }
 
 
 
-                
+
             {/* <div className="container mt-3 text-center">
                 <div style={{ backgroundColor: "#fff", padding: "5px", marginTop: "10px", border: "1px solid black" }} >
                     <div className="row">

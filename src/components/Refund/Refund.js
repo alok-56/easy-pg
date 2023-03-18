@@ -19,7 +19,6 @@ const Refund = () => {
     const getBook = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/bookinglist/${params.id}`)
         data = await data.json()
-        console.log(data)
         if (data) {
             refundStatus(data.refundid, data.transitionId[data.transitionId.length - 1])
         }

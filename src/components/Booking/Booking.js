@@ -47,6 +47,7 @@ const Booking = () => {
                     }
                 })
                 data = await data.json();
+                console.log(data)
                 if (data.status && data.id) {
                     let refundid = data.id;
                     let refundstatus = data.status;
@@ -58,18 +59,19 @@ const Booking = () => {
                         }
                     })
                     refund = await refund.json();
-                    console.log(refund)
                     if (refund.modifiedCount > 0) {
                         setLoads(false)
                         toast("refund process started");
-                        getbook()
+                        getbook();
+                        cancelRefund(id)
                     }
                 }
                 else {
                     setLoads(false)
-                    toast("refund process declined")
-                }
+                    toast("refund process declined due to exceed of time");
+                    cancelRefund(id)
 
+                }
             }
             else {
                 let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
@@ -89,6 +91,25 @@ const Booking = () => {
 
         }
     }
+
+    const cancelRefund = async (id) => {
+        var canceldate = new Date();
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
+            method: "put",
+            body: JSON.stringify({ id, status, canceldate, }),
+            headers: {
+                'content-Type': 'application/json'
+            }
+        })
+        data = await data.json();
+        if (data.acknowledged === true) {
+            getbook();
+            toast("your booking is cancelled succesfully");
+            ownerCancelemail(id, email);
+        }
+    }
+
+
     const ownerCancelemail = async (id, email) => {
         console.log(book)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancelowner`, {
@@ -111,7 +132,6 @@ const Booking = () => {
             <ToastContainer></ToastContainer>
             {
                 loads ? <div style={{
-
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -120,10 +140,7 @@ const Booking = () => {
                     <SpinnerRoundOutlined size={100} thickness={100} speed={103} color="#36ad47" />
 
                 </div> :
-
-
                     <div className="container mt-3 text-center">
-
                         {
                             data && data.length > 0 ?
                                 data.slice(0).reverse().map((item) => (
@@ -136,7 +153,7 @@ const Booking = () => {
                                                     <div>
                                                         <span style={{ fontSize: "12px" }}>{item.roomname}, {item.address}, {item.district}</span><br></br>
                                                         <span style={{ fontSize: "12px" }}>Bookin id : {item._id}</span><br></br>
-                                                        <span style={{ fontSize: "12px" }}>Booked on 2 nov 2022</span>
+                                                        <span style={{ fontSize: "12px" }}>Booked on {new Date(item.date).getDate()}/{ new Date(item.date).getMonth()+1}/{new Date(item.date).getFullYear()}</span>
                                                     </div>
                                                 </div>
                                             </div>

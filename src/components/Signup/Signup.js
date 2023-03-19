@@ -87,7 +87,7 @@ const Signup = () => {
                                     </div>
                                     <div id="info">
                                         <div id="info_head">
-                                            <input type="text" style={{textAlign:"center",borderRadius:"5px",padding:"5px"}} value={veri} onChange={(e) => setVeri(e.target.value)}></input>
+                                            <input type="text" style={{ textAlign: "center", borderRadius: "5px", padding: "5px" }} value={veri} onChange={(e) => setVeri(e.target.value)}></input>
                                         </div>
 
 

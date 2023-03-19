@@ -48,11 +48,11 @@ const Cancelled = () => {
                                     <div className="row">
                                         <div className="col-lg-5 col-md-5 col-sm-12 col-12">
                                             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                                                <img width={100} className="img-fluid" src={item.img} alt="Rooms"></img>
+                                                <img width={100} className="img-fluid" src={item.image} alt="Rooms"></img>
                                                 <div>
                                                     <span style={{ fontSize: "12px" }}>{item.name}, {item.address}, {item.district}</span><br></br>
                                                     <span style={{ fontSize: "12px" }}>{item.roomtype}</span><br></br>
-                                                    <span style={{ fontSize: "12px", fontWeight: "bold" }}>{item.canceldate}</span>
+                                                    <span style={{ fontSize: "12px", fontWeight: "bold" }}>{new Date(item.canceldate).getDate()}/{new Date(item.canceldate).getMonth() + 1}/{new Date(item.canceldate).getFullYear()}</span>
                                                 </div>
                                             </div>
                                         </div>

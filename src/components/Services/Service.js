@@ -15,11 +15,11 @@ const Service = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12 col-12 mt-5 text-center">
                             <h3 style={{ fontWeight: "bold" }}>Online Pg Facility For Students</h3>
-                            <p style={{ fontSize: "13px" }}>Third home is hasste-free Solution to Finding the Perfect Pg
+                            <p style={{ fontSize: "13px" }}>Easy Peasy is hasste-free Solution to Finding the Perfect Pg
                                 for Students in bhilai Chhattisgarsh..We Provide an Online
-                                platform For Students to Search For the available pg For theor
+                                platform For Students to Search For the available pg For there
                                 respective needs and make Bookings.We help Students to Find their
-                                third home with ease.
+                                Pg with ease.
                             </p>
                             <button className="btn btn-danger" style={{ fontWeight: "bold" }}><Link id="link" to="/rooms">Search pg</Link></button>
                         </div>

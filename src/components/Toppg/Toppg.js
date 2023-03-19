@@ -56,7 +56,7 @@ const Toppg = () => {
             </div>
             <div>
                 <div className='container mt-4'>
-                    <h4>Find a PG & mess Away from your Home</h4>
+                    <h4>Find a Pg Away from your Home</h4>
                     <div className='row mt-2'>
                         <div className='col-lg-3 col-md-3 col-sm-6 col-12 mt-2'>
                             <div id='pg1'>

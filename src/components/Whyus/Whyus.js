@@ -14,10 +14,10 @@ const Whyus = () => {
                         <div id="why_head">
                             <div id="heading">
                                 <h3 style={{ fontWeight: "bold" }}>Who we are and What You get<br></br> From us</h3>
-                                <p style={{ fontSize: "13px" }}>Third Home is a bussiness based in bhilai,chhattisgarh that provides a comprehensive online platform
+                                <p style={{ fontSize: "13px" }}>Easy Peasy is a bussiness based in bhilai,chhattisgarh that provides a comprehensive online platform
                                     to help students to find the perfect pg accommodation..We understand that finding a comfortable and affordable place to stay is a common problem
-                                    faced by many College students thats why we have developed a user-friendly platform that given stdents access to range of pg services from locating the perfect
-                                    accommodation to getting in touchwith landloads..</p>
+                                    faced by many College students thats why we have developed a user-friendly platform that given students access to range of pg services from locating the perfect
+                                    accommodation to getting in touch with landloads..</p>
                             </div>
                             <div id="list">
                                 <ul>

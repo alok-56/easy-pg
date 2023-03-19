@@ -24,7 +24,7 @@ const Verified = () => {
                             <img style={{ height: "150px" }} src={s2}></img>
                         </div>
                         <div>
-                            <p>Easy steps for booking a pg with various facility and </p>
+                            <p>Easy steps for booking a pg with various facility  </p>
                         </div>
 
                     </div>

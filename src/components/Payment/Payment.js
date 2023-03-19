@@ -152,10 +152,10 @@ const Payment = () => {
         data = await data.json();
     }
 
-    const Paynow = async (price, id, status, book) => {
+    const Paynow = async (price, id, status, book,pro) => {
         setLoads(true)
         if (status === "cancelled") {
-            navigate('/rooms/single/' + id)
+            navigate('/rooms/single/' + pro)
         }
         else {
 
@@ -222,7 +222,7 @@ const Payment = () => {
                                             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
                                             {
                                                 // item.status === 'cancelled' ? null : 
-                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id)}>Pay now</Button>
+                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id,item.productId)}>Pay now</Button>
 
                                             }
 

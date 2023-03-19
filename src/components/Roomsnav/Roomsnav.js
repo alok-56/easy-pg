@@ -18,7 +18,7 @@ const Roomsnav = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 order-last mt-2">
                             <div id="search">
-                                <span><input value={dta} onChange={(e)=>setDta(e.target.value)} type="text" placeholder="Enetr location/college/school"></input><span id="btn"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></span></span>
+                                <span><input value={dta} onChange={(e)=>setDta(e.target.value)} type="text" placeholder="Enter location/college/school"></input><span id="btn"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></span></span>
                             </div>
                         </div>
                         <div className="col-lg-3 col-sm-3 col-md-3 col-3 order-lg-last mt-2 text-center">

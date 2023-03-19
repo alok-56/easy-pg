@@ -187,7 +187,7 @@ const Userprofile = () => {
                             <div className="col-12 text-center mt-3">
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                     <div style={{ display: "block" }}>
-                                        <img width={150} src={images} style={{ borderRadius: "50%" }} alt="profile"></img>
+                                        <img width={150} src={images} style={{ borderRadius: "50%",maxHeight:"200px" }} alt="profile"></img>
                                     </div>
                                     <div className="m-3">
                                         <span>{name}({gender})</span><br></br>
@@ -223,7 +223,7 @@ const Userprofile = () => {
                             <div className="col-lg-3 col-md-3 col-sm-12 col-12 mt-1">
                                 <button
                                     onClick={() => Navigate('/profile/Transition/' + userid)}
-                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Transcition</button>
+                                    className="btn btn-light" style={{ border: "2px solid black", width: "100%" }}>Transition</button>
                             </div>
                         </div>
                     </div>

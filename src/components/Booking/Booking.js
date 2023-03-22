@@ -47,7 +47,6 @@ const Booking = () => {
                     }
                 })
                 data = await data.json();
-                console.log(data)
                 if (data.status && data.id) {
                     let refundid = data.id;
                     let refundstatus = data.status;
@@ -63,7 +62,7 @@ const Booking = () => {
                         setLoads(false)
                         toast("refund process started");
                         getbook();
-                        cancelRefund(id)
+                        cancelRefund(id,email)
                     }
                 }
                 else {
@@ -83,16 +82,17 @@ const Booking = () => {
                 })
                 data = await data.json();
                 if (data.acknowledged === true) {
+                    ownerCancelemail(id, email);
                     getbook();
                     toast("your booking is cancelled succesfully");
-                    ownerCancelemail(id, email);
+
                 }
             }
 
         }
     }
 
-    const cancelRefund = async (id) => {
+    const cancelRefund = async (id,email) => {
         var canceldate = new Date();
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
@@ -111,7 +111,7 @@ const Booking = () => {
 
 
     const ownerCancelemail = async (id, email) => {
-        console.log(book)
+        console.log(email)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancelowner`, {
             method: "post",
             body: JSON.stringify({ id, email }),
@@ -153,7 +153,7 @@ const Booking = () => {
                                                     <div>
                                                         <span style={{ fontSize: "12px" }}>{item.roomname}, {item.address}, {item.district}</span><br></br>
                                                         <span style={{ fontSize: "12px" }}>Bookin id : {item._id}</span><br></br>
-                                                        <span style={{ fontSize: "12px" }}>Booked on {new Date(item.date).getDate()}/{ new Date(item.date).getMonth()+1}/{new Date(item.date).getFullYear()}</span>
+                                                        <span style={{ fontSize: "12px" }}>Booked on {new Date(item.date).getDate()}/{new Date(item.date).getMonth() + 1}/{new Date(item.date).getFullYear()}</span>
                                                     </div>
                                                 </div>
                                             </div>

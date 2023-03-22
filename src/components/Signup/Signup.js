@@ -39,6 +39,7 @@ const Signup = () => {
                 }
             });
             result = await result.json()
+            console.log(result)
             if (result) {
                 toast("OTP SEND successfully");
                 setLoading(false)

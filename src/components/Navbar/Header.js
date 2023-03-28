@@ -7,7 +7,7 @@ const Header = () => {
         <div id='head'>
             <div id='head_content'>
                 <h1 style={{ fontWeight: "bold" }}>We Help Students to Find Easy Pg</h1>
-                <p style={{ fontSize: "20px" }}>search pg near your location</p>
+                <p style={{ fontSize: "20px" }}>search pg near your locatio</p>
                 <div>
                     <button className='btn btn-danger' style={{ fontWeight: "bold" }}><Link id="link" to="/rooms">Search pg</Link></button>
                     {/* <button className='btn btn-danger m-2' style={{ fontWeight: "bold" }}><Link id="link" to="/mess">Search mess</Link></button> */}

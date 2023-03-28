@@ -3,7 +3,7 @@ import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo from './images/logo.jpeg'
+import logo from './images/logo.png'
 import './Navbar.css'
 import { ToastContainer, toast } from "react-toastify";
 

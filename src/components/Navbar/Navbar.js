@@ -3,7 +3,7 @@ import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo from './images/logo.png'
+import logo from './images/logo.jpeg'
 import './Navbar.css'
 import { ToastContainer, toast } from "react-toastify";
 
@@ -34,7 +34,7 @@ const Navpage = () => {
             <div>
                 <Navbar collapseOnSelect expand="md" style={{ backgroundColor: "black" }} variant="dark"  >
                     <Container>
-                        <Navbar.Brand id="link" style={{ fontSize: "35px" }} href="/"><img width={100} src={logo}></img></Navbar.Brand>
+                        <Navbar.Brand id="link" style={{ fontSize: "20px" }} href="/"><img width={100} src={logo}></img></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="m-auto" >

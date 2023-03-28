@@ -64,10 +64,10 @@ const Login = () => {
                                             </button>
                                         </div>
                                         <div id="bot2">
-                                            <div className="m-2" style={{ display: "flex", justifyContent: "end", fontWeight: "bold", color: "blue" }}>
+                                            <div className="m-2" style={{ display: "flex", justifyContent: "end", fontWeight: "bold",  }}>
                                                 <p><Link to="/Forgot">Forgot password</Link></p>
                                             </div>
-                                            <span>New user/<Link to="/Signup" style={{ color: "blue", fontWeight: "bold", textDecoration: "none" }}>Sign up</Link></span>
+                                            <span>New user/<Link to="/Signup" style={{  fontWeight: "bold", textDecoration: "none" }}>Sign up</Link></span>
                                         </div>
 
                                     </div>

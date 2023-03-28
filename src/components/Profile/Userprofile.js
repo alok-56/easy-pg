@@ -63,7 +63,6 @@ function MyVerticallyCenteredModal(props) {
         data = await data.json();
         if (data.acknowledged === true) {
             user();
-            navigate('/')
         }
     }
 

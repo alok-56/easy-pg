@@ -128,7 +128,7 @@ const Signup = () => {
                                         </button>
                                     </div>
                                     <div id="bot5" className="mt-3">
-                                        <span>Aready have account/<Link to="/Signin" style={{ color: "blue", fontWeight: "bold", textDecoration: "none" }}>Login </Link></span>
+                                        <span>Already have account/<Link to="/Signin" style={{  fontWeight: "bold", textDecoration: "none" }}>Login </Link></span>
                                     </div>
                                 </div>
                             </div>

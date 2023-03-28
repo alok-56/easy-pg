@@ -47,7 +47,7 @@ const Navpage = () => {
                                 }
                             </Nav>
                             <Nav>
-                                
+
                                 <Nav.Link><NavLink id="link" to="/profile">Profile</NavLink></Nav.Link>
                             </Nav>
                         </Navbar.Collapse>

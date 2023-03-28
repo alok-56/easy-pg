@@ -36,7 +36,7 @@ const Forgotpass = () => {
             });
             result = await result.json()
             if (result) {
-                setData(true)
+                setData(false)
             }
         }
         else {
@@ -55,7 +55,6 @@ const Forgotpass = () => {
     }
     const changepass = async () => {
         if (password == compassword) {
-
             let result = await fetch('https://easy-ser.vercel.app/Aut/forgot', {
                 method: "put",
                 body: JSON.stringify({ email, password }),

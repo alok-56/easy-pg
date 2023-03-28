@@ -19,7 +19,7 @@ function MyVerticallyCenteredModal(props) {
     const navigate = useNavigate();
     const [profession, SetProfession] = useState('');
     const userid = JSON.parse(localStorage.getItem('user'))._id;
-  
+
 
     async function handle(e) {
         setLoading(true)
@@ -50,7 +50,7 @@ function MyVerticallyCenteredModal(props) {
         SetGender(data.gender);
         SetProfession(data.profession);
         SetImages(data.images)
-        
+
     }
     const updateuser = async () => {
         let data = await fetch(`https://easy-ser.vercel.app/Aut/profile/${userid}`, {
@@ -187,7 +187,7 @@ const Userprofile = () => {
                             <div className="col-12 text-center mt-3">
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                     <div style={{ display: "block" }}>
-                                        <img width={150} src={images} style={{ borderRadius: "50%",maxHeight:"200px" }} alt="profile"></img>
+                                        <img width={150} src={images} style={{ borderRadius: "50%", maxHeight: "200px" }} alt="profile"></img>
                                     </div>
                                     <div className="m-3">
                                         <span>{name}({gender})</span><br></br>
@@ -227,7 +227,7 @@ const Userprofile = () => {
                             </div>
                         </div>
                     </div>
-}
+            }
             <Faq></Faq>
             <Footer></Footer>
 

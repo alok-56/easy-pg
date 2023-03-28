@@ -75,7 +75,7 @@ const Signup = () => {
     }
     return (
         <div>
-            <ToastContainer></ToastContainer>
+            <ToastContainer />
             {
                 load ? <div id="sign_head">
                     <div className="container">

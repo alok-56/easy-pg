@@ -38,6 +38,9 @@ function MyVerticallyCenteredModal(props) {
     const [ownername, setOwnername] = useState('');
     const [ownerEmail, setOwnerEmail] = useState('');
     const [ownerNumber, setOwnernNumber] = useState()
+
+    const [remaining, setRemaining] = useState('')
+
     const [add, setAdd] = useState('')
     const params = useParams();
     const navigate = useNavigate()
@@ -53,6 +56,8 @@ function MyVerticallyCenteredModal(props) {
         setName(username);
         setEmail(useremail);
         productdata();
+
+
 
     }, []);
 
@@ -71,6 +76,8 @@ function MyVerticallyCenteredModal(props) {
         setOwnerEmail(data.email);
         setOwnernNumber(data.number)
         setAdd(data.address)
+        setRemaining(data.remainingbed)
+
     }
     var date = new Date();
     var time = new Date().getTime();
@@ -106,6 +113,7 @@ function MyVerticallyCenteredModal(props) {
         rzp.open();
     }
     const postbooking = async (db) => {
+        setLoad(true)
         let transitionId = db.data.payment_id;
         let orderId = db.data.order_id;
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/postbooking`, {
@@ -120,6 +128,27 @@ function MyVerticallyCenteredModal(props) {
         data = await data.json();
         if (data) {
             navigate('/profile/booking/' + usersId)
+            update()
+            setLoad(false)
+        }
+        else{
+            setLoad(false)
+        }
+    }
+
+    const update = async () => {
+        let remainingbed = remaining - 1;
+        let data = await fetch(`http://localhost:4500/room/update/${params.id}`, {
+            method: "put",
+            body: JSON.stringify({ remainingbed }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        data = await data.json();
+        if (data) {
+            console.log(data)
         }
     }
 

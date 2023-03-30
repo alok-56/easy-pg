@@ -17,6 +17,8 @@ const Booking = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [loads, setLoads] = useState(true)
+    const [remaining, setRemaining] = useState('')
+    const [id, setId] = useState('')
 
     useEffect(() => {
         getbook();
@@ -28,7 +30,7 @@ const Booking = () => {
         setLoads(false)
     }
 
-    const cancel = async (id, statuss, email, time, price, payment) => {
+    const cancel = async (id, statuss, email, time, price, payment, product) => {
         if (statuss === 'cancelled') {
             toast("Your Booking is already cancelled")
         }
@@ -62,13 +64,15 @@ const Booking = () => {
                         setLoads(false)
                         toast("refund process started");
                         getbook();
-                        cancelRefund(id,email)
+                        cancelRefund(id, email)
+                        getproduct(product)
+
                     }
                 }
                 else {
                     setLoads(false)
                     toast("refund process declined due to exceed of time");
-                    cancelRefund(id)
+                    cancelRefund(id, email)
 
                 }
             }
@@ -85,6 +89,8 @@ const Booking = () => {
                     ownerCancelemail(id, email);
                     getbook();
                     toast("your booking is cancelled succesfully");
+                    getproduct(product)
+
 
                 }
             }
@@ -92,7 +98,34 @@ const Booking = () => {
         }
     }
 
-    const cancelRefund = async (id,email) => {
+    const getproduct = async (id) => {
+        let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${id}`);
+        data = await data.json();
+        console.log(data)
+        if(data){
+            update(id,data.remainingbed)
+        }
+        
+    }
+
+    const update = async (id,bed) => {
+        let remainingbed = bed +1 ;
+       
+        let data = await fetch(`http://localhost:4500/room/update/${id}`, {
+            method: "put",
+            body: JSON.stringify({ remainingbed }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        data = await data.json();
+        if (data) {
+            console.log(data)
+        }
+    }
+
+    const cancelRefund = async (id, email) => {
         var canceldate = new Date();
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
@@ -110,6 +143,7 @@ const Booking = () => {
     }
 
 
+
     const ownerCancelemail = async (id, email) => {
         console.log(email)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancelowner`, {
@@ -125,6 +159,7 @@ const Booking = () => {
             console.log("send")
         }
     }
+
 
     return (
         <div>
@@ -170,7 +205,7 @@ const Booking = () => {
                                             <div className="col-lg-5 col-md-5 col-sm-7 col-7 mt-1">
                                                 {/* <span style={{ fontWeight: "bold" }}>Status:</span><span style={{ color: "red", fontWeight: "bold" }}>Paid</span><br></br> */}
                                                 {
-                                                    item.refundstatus ? <Button variant="outline-danger" onClick={() => navigate('/Refund/' + item._id)} >Refund Status</Button> : <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button>
+                                                    item.refundstatus ? <Button variant="outline-danger" onClick={() => navigate('/Refund/' + item._id)} >Refund Status</Button> : <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId, item.productId)}>Cancel Booking</Button>
                                                 }
                                                 {/* <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button> */}
                                                 <Button

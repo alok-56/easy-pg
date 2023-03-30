@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './ownerinfo.css'
 import logo from './images/logo.jpeg'
-import {useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Ownerinfo = () => {
     const params = useParams();

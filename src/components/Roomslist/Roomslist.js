@@ -5,8 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import b1 from "./images/rooms.jpg"
 import './Roomslist.css'
 import "./Roomsnav.css"
-import Footer from "../Footer/Footer";
 import { SpinnerRoundOutlined } from 'spinners-react';
+import Chat from "../Chat";
+
+
+
+
 
 const Roomslist = () => {
     const [room, SetRoom] = useState('')
@@ -68,6 +72,12 @@ const Roomslist = () => {
                     </div>
                 </div>
             </div>
+            {/* <div style={{position:"absolute",bottom:"5%",right:"3%",position:"fixed",backgroundColor:"black",padding:10,borderRadius:5}}>
+            <span><a href="https://wa.me/8340175751"><i style={{
+                                color:"red", fontSize: 30
+                            }} class="fa-brands fa-whatsapp"></i></a></span>
+            </div> */}
+            <Chat></Chat>
             {
                 load ? <div style={{
 
@@ -101,6 +111,9 @@ const Roomslist = () => {
                                                                     <span><span style={{ fontWeight: "bold", fontSize: "15px" }}> {item.district}</span> {item.state}</span>
                                                                 </div>
                                                                 <div>
+                                                                    {/* <span id="girls"><a href="https://wa.me/8340175751"><i style={{
+                                                                        color:"green",fontSize:30
+                                                                    }} class="fa-brands fa-whatsapp"></i></a></span> */}
                                                                     <span id="girls">{item.Preferred}</span>
                                                                 </div>
                                                             </div>
@@ -122,11 +135,14 @@ const Roomslist = () => {
                                                     </div>
                                                 </div>
                                             </div>
+
                                         )) : <h1>No room found</h1>
                                 }
                             </div>
+                           
                         </div>
                     </div>
+
 
             }
 

@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { SpinnerRoundOutlined } from 'spinners-react';
+import Chat from "../Chat";
 
 function MyVerticallyCenteredModal(props) {
     const [name, SetName] = useState('');
@@ -63,6 +64,7 @@ function MyVerticallyCenteredModal(props) {
         data = await data.json();
         if (data.acknowledged === true) {
             user();
+            navigate('/')
         }
     }
 
@@ -170,6 +172,7 @@ const Userprofile = () => {
     return (
         <div>
             <Navpage></Navpage>
+           <Chat></Chat>
             {
                 load ? <div style={{
 

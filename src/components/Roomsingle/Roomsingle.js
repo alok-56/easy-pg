@@ -11,6 +11,7 @@ import { SpinnerCircular } from 'spinners-react';
 import 'react-toastify/dist/ReactToastify.css';
 import { SpinnerRoundOutlined } from 'spinners-react';
 import { ToastContainer, toast } from "react-toastify";
+import Chat from '../Chat';
 
 
 
@@ -324,6 +325,7 @@ const Roomsingle = () => {
     }
     return (
         <div >
+            <Chat></Chat>
             {
                 load1 ? <div style={{
 
@@ -344,7 +346,7 @@ const Roomsingle = () => {
                                             <Carousel.Item>
                                                 <img
                                                     className="d-block w-100"
-                                                    src={b1}
+                                                    src={b2}
                                                     alt="First slide"
                                                     style={{ height: "330px", borderRadius: "5px" }}
                                                 />
@@ -360,7 +362,7 @@ const Roomsingle = () => {
                                             <Carousel.Item>
                                                 <img
                                                     className="d-block w-100"
-                                                    src={b1}
+                                                    src={b2}
                                                     alt="Third slide"
                                                     style={{ height: "330px", borderRadius: "5px" }}
                                                 />

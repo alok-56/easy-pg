@@ -1,4 +1,5 @@
 import React from "react";
+import Chat from "../../components/Chat";
 import Faq from "../../components/FAQ/Faq";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Navbar/Header";
@@ -12,6 +13,7 @@ const Home = () => {
     return (
         <div>
             <Navbar></Navbar>
+            <Chat></Chat>
             <Header></Header>
             <Whyus></Whyus>
             <Service></Service>

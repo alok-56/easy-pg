@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './ownerinfo.css'
 import logo from './images/logo.jpeg'
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Ownerinfo = () => {
     const params = useParams();
@@ -12,6 +12,7 @@ const Ownerinfo = () => {
     const [ownerId, setOwnerId] = useState('');
     const [bookingId, setBookingId] = useState('')
     const [roomid, setRoomid] = useState('')
+    const navigate=useNavigate
     useEffect(() => {
         Owenerinfo();
     }, [])
@@ -102,7 +103,7 @@ const Ownerinfo = () => {
 
                                 </div>
                                 <div>
-                                    <button className="btn btn-danger m-2">Track location</button>
+                                    <button className="btn btn-danger m-2"><a href={`https://www.google.com/maps?q=${21.220296},${81.337937}&z=17&hl=en`}>Track location</a></button>
                                 </div>
                                 <div>
                                     <ul className="mt-3">

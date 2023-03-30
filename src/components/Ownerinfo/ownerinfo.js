@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './ownerinfo.css'
 import logo from './images/logo.jpeg'
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 
 const Ownerinfo = () => {
     const params = useParams();
@@ -12,7 +12,7 @@ const Ownerinfo = () => {
     const [ownerId, setOwnerId] = useState('');
     const [bookingId, setBookingId] = useState('')
     const [roomid, setRoomid] = useState('')
-    const navigate=useNavigate
+    const navigate = useNavigate
     useEffect(() => {
         Owenerinfo();
     }, [])

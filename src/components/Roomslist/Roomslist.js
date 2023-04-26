@@ -9,9 +9,6 @@ import { SpinnerRoundOutlined } from 'spinners-react';
 import Chat from "../Chat";
 
 
-
-
-
 const Roomslist = () => {
     const [room, SetRoom] = useState('')
     const navigate = useNavigate();
@@ -139,7 +136,7 @@ const Roomslist = () => {
                                         )) : <h1>No room found</h1>
                                 }
                             </div>
-                           
+
                         </div>
                     </div>
 

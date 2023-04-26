@@ -81,6 +81,8 @@ function MyVerticallyCenteredModal(props) {
     }
     var date = new Date();
     var time = new Date().getTime();
+    const lastdate = new Date();
+    lastdate.setDate(lastdate.getDate() + 30)
 
 
     // console.log(usersId, sellerId, roomname, name, email, Ages, gender, price, transitionId, orderId, date,status)
@@ -119,7 +121,7 @@ function MyVerticallyCenteredModal(props) {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/postbooking`, {
             method: "post",
             body: JSON.stringify({
-                usersId, sellerId, transitionId, orderId, productId, name, pay, email, img, Ages, date, time, status, price, roomname, state, add, district, ownerEmail, ownername, ownerNumber
+                usersId, sellerId, transitionId, orderId, lastdate, productId, name, pay, email, img, Ages, date, time, status, price, roomname, state, add, district, ownerEmail, ownername, ownerNumber
             }),
             headers: {
                 'content-type': 'application/json'
@@ -131,14 +133,14 @@ function MyVerticallyCenteredModal(props) {
             update()
             setLoad(false)
         }
-        else{
+        else {
             setLoad(false)
         }
     }
 
     const update = async () => {
         let remainingbed = remaining - 1;
-        let data = await fetch(`http://localhost:4500/room/update/${params.id}`, {
+        let data = await fetch(`https://easy-ser.vercel.app/room/update/${params.id}`, {
             method: "put",
             body: JSON.stringify({ remainingbed }),
             headers: {

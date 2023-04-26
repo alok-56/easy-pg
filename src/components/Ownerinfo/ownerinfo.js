@@ -103,7 +103,10 @@ const Ownerinfo = () => {
 
                                 </div>
                                 <div>
-                                    <button className="btn btn-danger m-2"><a href={`https://www.google.com/maps?q=${21.220296},${81.337937}&z=17&hl=en`}>Track location</a></button>
+                                    <button className="btn btn-danger m-2"><a href={`https://www.google.com/maps?q=${21.220296},${81.337937}&z=17&hl=en`} style={{
+                                        textDecoration:"none",
+                                        color:"#fff"
+                                    }}>Track location</a></button>
                                 </div>
                                 <div>
                                     <ul className="mt-3">

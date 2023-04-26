@@ -111,7 +111,7 @@ const Booking = () => {
     const update = async (id,bed) => {
         let remainingbed = bed +1 ;
        
-        let data = await fetch(`http://localhost:4500/room/update/${id}`, {
+        let data = await fetch(`https://easy-ser.vercel.app/room/update/${id}`, {
             method: "put",
             body: JSON.stringify({ remainingbed }),
             headers: {

@@ -96,7 +96,7 @@ const Payment = () => {
 
 
 
-    const handlerazarpay = async (data, id, book,date) => {
+    const handlerazarpay = async (data, id, book) => {
         setLoads(false)
         const options = {
             key: 'rzp_test_MtraH0q566XjUb',
@@ -115,7 +115,7 @@ const Payment = () => {
                 data = await data.json();
                 if (data.code === 200) {
                     postbooking(data, id);
-                    update(book, date);
+                    update(book);
                 }
             }
         }
@@ -124,9 +124,6 @@ const Payment = () => {
     }
 
     const update = async (id) => {
-        const date = new Date(da)
-        date.setDate(date.getDate() + 30)
-        const time = date.getTime()
         let pay = "paid";
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
@@ -155,7 +152,7 @@ const Payment = () => {
         data = await data.json();
     }
 
-    const Paynow = async (price, id, status, book, pro,date) => {
+    const Paynow = async (price, id, status, book, pro) => {
         setLoads(true)
         if (status === "cancelled") {
             navigate('/rooms/single/' + pro)
@@ -172,7 +169,7 @@ const Payment = () => {
 
             result = await result.json();
             if (result.code === 200) {
-                handlerazarpay(result.data, id, book,date)
+                handlerazarpay(result.data, id, book)
             }
 
 
@@ -225,7 +222,7 @@ const Payment = () => {
                                             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
                                             {
                                                 // item.status === 'cancelled' ? null : 
-                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId,item.date)}>Pay now</Button>
+                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId)}>Pay now</Button>
 
                                             }
 

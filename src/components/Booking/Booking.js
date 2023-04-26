@@ -102,15 +102,14 @@ const Booking = () => {
         let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${id}`);
         data = await data.json();
         console.log(data)
-        if(data){
-            update(id,data.remainingbed)
+        if (data) {
+            update(id, data.remainingbed)
         }
-        
+
     }
 
-    const update = async (id,bed) => {
-        let remainingbed = bed +1 ;
-       
+    const update = async (id, bed) => {
+        let remainingbed = bed + 1;
         let data = await fetch(`https://easy-ser.vercel.app/room/update/${id}`, {
             method: "put",
             body: JSON.stringify({ remainingbed }),

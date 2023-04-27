@@ -26,12 +26,13 @@ const Payment = () => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/userbookinglist/${params.id}`);
         data = await data.json();
         setDate(data);
-        setLoads(false)
+        setLoads(false);
         for (var i = 0; i < date.length; i++) {
             var date1 = data[i].time;
             var date2 = new Date();
             var Difference_In_Time = date2.getTime() - date1;
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            console.log(Difference_In_Days)
             if (Difference_In_Days > 30) {
                 if (data[i].status != 'cancelled') {
                     let id = data[i]._id;
@@ -57,6 +58,7 @@ const Payment = () => {
                             setBookid(data[i]._id)
                             sendCancelemail();
                             ownerCancelemail();
+                            getproduct(data[i].productId)
                         }
                     }
                 }
@@ -64,7 +66,33 @@ const Payment = () => {
         }
     }
 
-    const sendCancelemail = async () => {
+    const getproduct = async (id) => {
+        let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${id}`);
+        data = await data.json();
+        console.log(data)
+        if (data) {
+            updateroom(id, data.remainingbed)
+        }
+
+    }
+
+    const updateroom = async (id, remaining) => {
+        let remainingbed = remaining + 1;
+        let data = await fetch(`https://easy-ser.vercel.app/room/update/${id}`, {
+            method: "put",
+            body: JSON.stringify({ remainingbed }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        data = await data.json();
+        if (data) {
+            console.log("updated", data)
+        }
+    }
+
+    const sendCancelemail = async (email) => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancel`, {
             method: "post",
             body: JSON.stringify({ email, id }),
@@ -96,7 +124,7 @@ const Payment = () => {
 
 
 
-    const handlerazarpay = async (data, id, book) => {
+    const handlerazarpay = async (data, id, book, date, last) => {
         setLoads(false)
         const options = {
             key: 'rzp_test_MtraH0q566XjUb',
@@ -115,7 +143,7 @@ const Payment = () => {
                 data = await data.json();
                 if (data.code === 200) {
                     postbooking(data, id);
-                    update(book);
+                    update(book, date, last);
                 }
             }
         }
@@ -123,16 +151,22 @@ const Payment = () => {
         rzp.open();
     }
 
-    const update = async (id) => {
+    const update = async (id, da, last) => {
+        const date = new Date(da)
+        date.setDate(date.getDate() + 30)
+        const time = date.getTime()
+        const lastdate = new Date(last)
+        lastdate.setDate(date.getDate() + 30)
         let pay = "paid";
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
-            body: JSON.stringify({ id, pay }),
+            body: JSON.stringify({ id, pay, date, time, lastdate }),
             headers: {
                 'content-Type': 'application/json'
             }
         })
         data = await data.json();
+        console.log("updated", data)
     }
 
 
@@ -152,7 +186,7 @@ const Payment = () => {
         data = await data.json();
     }
 
-    const Paynow = async (price, id, status, book, pro) => {
+    const Paynow = async (price, id, status, book, pro, date, last) => {
         setLoads(true)
         if (status === "cancelled") {
             navigate('/rooms/single/' + pro)
@@ -169,7 +203,7 @@ const Payment = () => {
 
             result = await result.json();
             if (result.code === 200) {
-                handlerazarpay(result.data, id, book)
+                handlerazarpay(result.data, id, book, date, last)
             }
 
 
@@ -222,7 +256,7 @@ const Payment = () => {
                                             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
                                             {
                                                 // item.status === 'cancelled' ? null : 
-                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId)}>Pay now</Button>
+                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId, item.date, item.lastdate)}>Pay now</Button>
 
                                             }
 

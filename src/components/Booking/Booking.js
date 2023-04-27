@@ -6,6 +6,7 @@ import "./Booking.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { SpinnerRoundOutlined } from 'spinners-react';
+import Modal from 'react-bootstrap/Modal';
 
 
 const Booking = () => {
@@ -19,6 +20,9 @@ const Booking = () => {
     const [loads, setLoads] = useState(true)
     const [remaining, setRemaining] = useState('')
     const [id, setId] = useState('')
+    const [show, setShow] = useState(false)
+    const [can, setCan] = useState(false)
+
 
     useEffect(() => {
         getbook();
@@ -30,72 +34,87 @@ const Booking = () => {
         setLoads(false)
     }
 
-    const cancel = async (id, statuss, email, time, price, payment, product) => {
-        if (statuss === 'cancelled') {
-            toast("Your Booking is already cancelled")
-        }
-        else {
-            var canceldate = new Date();
-            var Difference_In_Time = canceldate.getTime() - time;
-            var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-            console.log(Difference_In_Days)
-            if (Difference_In_Days <= 1) {
-                setLoads(true)
-                let data = await fetch(`https://easy-ser.vercel.app/payment/refund`, {
-                    method: "post",
-                    body: JSON.stringify({ price, payment }),
-                    headers: {
-                        'content-Type': 'application/json'
-                    }
-                })
-                data = await data.json();
-                if (data.status && data.id) {
-                    let refundid = data.id;
-                    let refundstatus = data.status;
-                    let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
-                        method: "put",
-                        body: JSON.stringify({ id, refundid, refundstatus }),
+
+    function set() {
+        setCan(true)
+        setShow(false)
+    }
+
+    const cancel = async (id, statuss, email, time, price, payment, product, useremail) => {
+        setShow(true)
+        if (can) {
+            toast("Cancellation process started")
+            if (statuss === 'cancelled') {
+                toast("Your Booking is already cancelled")
+                setCan(false)
+            }
+            else {
+                var canceldate = new Date();
+                var Difference_In_Time = canceldate.getTime() - time;
+                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                console.log(Difference_In_Days)
+                if (Difference_In_Days <= 1) {
+                    setLoads(true)
+                    let data = await fetch(`https://easy-ser.vercel.app/payment/refund`, {
+                        method: "post",
+                        body: JSON.stringify({ price, payment }),
                         headers: {
                             'content-Type': 'application/json'
                         }
                     })
-                    refund = await refund.json();
-                    if (refund.modifiedCount > 0) {
+                    data = await data.json();
+                    if (data.status && data.id) {
+                        let refundid = data.id;
+                        let refundstatus = data.status;
+                        let refund = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
+                            method: "put",
+                            body: JSON.stringify({ id, refundid, refundstatus }),
+                            headers: {
+                                'content-Type': 'application/json'
+                            }
+                        })
+                        refund = await refund.json();
+                        if (refund.modifiedCount > 0) {
+                            setLoads(false)
+                            toast("refund process started");
+                            getbook();
+                            cancelRefund(id, email)
+                            getproduct(product)
+
+                        }
+                    }
+                    else {
                         setLoads(false)
-                        toast("refund process started");
-                        getbook();
+                        toast("refund process declined due to exceed of time");
                         cancelRefund(id, email)
-                        getproduct(product)
+                        setCan(false)
 
                     }
                 }
                 else {
-                    setLoads(false)
-                    toast("refund process declined due to exceed of time");
-                    cancelRefund(id, email)
+                    let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
+                        method: "put",
+                        body: JSON.stringify({ id, status, canceldate, }),
+                        headers: {
+                            'content-Type': 'application/json'
+                        }
+                    })
+                    data = await data.json();
+                    if (data.acknowledged === true) {
+                        ownerCancelemail(id, email);
+                        userCancelemail(id, useremail)
+                        getbook();
+                        toast("your booking is cancelled succesfully");
+                        getproduct(product)
+                        setCan(false)
 
-                }
-            }
-            else {
-                let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
-                    method: "put",
-                    body: JSON.stringify({ id, status, canceldate, }),
-                    headers: {
-                        'content-Type': 'application/json'
                     }
-                })
-                data = await data.json();
-                if (data.acknowledged === true) {
-                    ownerCancelemail(id, email);
-                    getbook();
-                    toast("your booking is cancelled succesfully");
-                    getproduct(product)
-
-
                 }
+
             }
 
         }
+
     }
 
     const getproduct = async (id) => {
@@ -159,6 +178,22 @@ const Booking = () => {
         }
     }
 
+    const userCancelemail = async (id, email) => {
+        console.log(email)
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancel`, {
+            method: "post",
+            body: JSON.stringify({ id, email }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        data = await data.json();
+        if (data) {
+            console.log("send")
+        }
+    }
+
 
     return (
         <div>
@@ -175,6 +210,24 @@ const Booking = () => {
 
                 </div> :
                     <div className="container mt-3 text-center">
+
+
+                        <Modal show={show} >
+                            <Modal.Header >
+                                <Modal.Title>Conformation</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are You suru to cancel your booking</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={set}>
+                                    yes
+                                </Button>
+                                <Button variant="primary" onClick={() => setShow(false)}>
+                                    No
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+
+
                         {
                             data && data.length > 0 ?
                                 data.slice(0).reverse().map((item) => (
@@ -204,7 +257,7 @@ const Booking = () => {
                                             <div className="col-lg-5 col-md-5 col-sm-7 col-7 mt-1">
                                                 {/* <span style={{ fontWeight: "bold" }}>Status:</span><span style={{ color: "red", fontWeight: "bold" }}>Paid</span><br></br> */}
                                                 {
-                                                    item.refundstatus ? <Button variant="outline-danger" onClick={() => navigate('/Refund/' + item._id)} >Refund Status</Button> : <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId, item.productId)}>Cancel Booking</Button>
+                                                    item.refundstatus ? <Button variant="outline-danger" onClick={() => navigate('/Refund/' + item._id)} >Refund Status</Button> : <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId, item.productId, item.email)}>Cancel Booking</Button>
                                                 }
                                                 {/* <Button variant="outline-danger" onClick={() => cancel(item._id, item.status, item.ownerEmail, item.time, item.price, item.transitionId)}>Cancel Booking</Button> */}
                                                 <Button

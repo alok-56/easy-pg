@@ -34,7 +34,7 @@ const Payment = () => {
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
             console.log(Difference_In_Days)
             if (Difference_In_Days > 30) {
-                if (data[i].status != 'cancelled') {
+                if (data[i].status !== 'cancelled') {
                     let id = data[i]._id;
                     let update = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                         method: "put",
@@ -249,7 +249,7 @@ const Payment = () => {
                                                 <span style={{ fontWeight: "bold" }}>Paid Total : <span style={{ fontSize: "10px" }}> {item.price}</span></span><br></br>
                                                 {/* <span style={{ fontWeight: "bold" }}>Month : <span style={{ fontSize: "10px" }}>July</span></span><br></br> */}
                                                 {/* <span style={{ fontWeight: "bold" }}>Booked Till : <span style={{ fontSize: "10px" }}>5 July</span></span> */}
-                                                <span style={{ fontWeight: "bold" }}>last date: <span style={{ fontSize: "10px" }}>8 July</span></span>
+                                                <span style={{ fontWeight: "500" }}>last Pay date: <span style={{ fontSize: "10px" }}>{new Date(item.lastdate).getDate()}/{new Date(item.lastdate).getMonth() + 1}/{new Date(item.lastdate).getFullYear()}</span></span>
                                             </div>
                                         </div>
                                         <div className="col-lg-5 col-md-5 col-sm-6 col-6 mt-2">

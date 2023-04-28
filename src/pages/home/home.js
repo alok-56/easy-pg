@@ -8,6 +8,7 @@ import Service from "../../components/Services/Service";
 import Toppg from "../../components/Toppg/Toppg";
 import Verified from "../../components/Verified/Verified";
 import Whyus from "../../components/Whyus/Whyus";
+import Mob from "../../components/Mob/Mob";
 
 const Home = () => {
     return (
@@ -16,10 +17,9 @@ const Home = () => {
             <Chat></Chat>
             <Header></Header>
             <Whyus></Whyus>
+            <Mob></Mob>
             <Service></Service>
-            <Toppg></Toppg>
             <Verified></Verified>
-            <Faq></Faq>
             <Footer></Footer>
         </div>
     )

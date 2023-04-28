@@ -7,17 +7,17 @@ const Whyus = () => {
         <div id="why">
             <div className="container-fluid mt-5">
                 <div className="row">
-                    <div className="col-lg-5 col-md-5 col-sm-12 col-12">
+                    <div className="col-lg-5 col-md-5 col-sm-12 col-12 text-center">
                         <img height={350} width={350} style={{ borderRadius: "5px" }} id="im" src={why}></img>
                     </div>
                     <div className="col-lg-7 col-md-7 col-sm-12 col-12 mt-3">
                         <div id="why_head">
                             <div id="heading">
                                 <h3 style={{ fontWeight: "bold" }}>Who we are and What You get<br></br> From us</h3>
-                                <p style={{ fontSize: "13px" }}>Easy Peasy is a bussiness based in bhilai,chhattisgarh that provides a comprehensive online platform
-                                    to help students to find the perfect pg accommodation..We understand that finding a comfortable and affordable place to stay is a common problem
-                                    faced by many College students thats why we have developed a user-friendly platform that given students access to range of pg services from locating the perfect
-                                    accommodation to getting in touch with landloads..</p>
+                                <p style={{ fontSize: "13px" }}>Easy Pg is a business located in Bhilai, Chhattisgarh,
+                                    that offers an extensive online platform to aid students in finding the ideal PG
+                                    accommodation. The company aims to simplify the process of finding the perfect PG for
+                                    students who are new to the city and don't have any prior knowledge of the area.</p>
                             </div>
                             <div id="list">
                                 <ul>

@@ -34,7 +34,7 @@ const Navpage = () => {
             <div>
                 <Navbar collapseOnSelect expand="md" style={{ backgroundColor: "black" }} variant="dark"  >
                     <Container>
-                        <Navbar.Brand id="link" style={{ fontSize: "20px" }} href="/"><img  width={100} src={logo}></img></Navbar.Brand>
+                        <Navbar.Brand id="link" style={{ fontSize: "20px" }} href="/"><img width={100} src={logo}></img></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="m-auto" >

@@ -54,7 +54,6 @@ const Transition = () => {
                                         <div className="col-lg-3 col-md-3 col-sm-6 col-4 mt-2 text-center">
                                             <div>
                                                 <span style={{ fontWeight: "bold", fontSize: "14px" }}>Amount : <span style={{ fontSize: "10px" }}> {item.price}</span></span><br></br>
-                                                <span style={{ fontWeight: "bold", fontSize: "14px" }}>Month : <span style={{ fontSize: "10px" }}></span></span><br></br>
                                             </div>
                                         </div>
                                         <div className="col-lg-3 col-md-3 col-sm-6 col-8 mt-lg-2 mt-md-2 mt-sm-0 mt-0 ">

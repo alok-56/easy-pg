@@ -11,7 +11,7 @@ const Header = () => {
                     near you</p>
                 <div>
                     <button className='btn btn-dark' style={{ fontWeight: "bold" }}><Link id="link" to="/rooms">Search pg</Link></button>
-                    <p className="mt-4" style={{fontSize:"15px",fontWeight:"bold"}}> Easy Pg is a one-stop-shop for students seeking PG accommodation</p>
+                    <p className="mt-4" style={{fontSize:"15px",fontWeight:"bold",color:"#fff"}}> Easy Pg is a one-stop-shop for students seeking PG accommodation</p>
                     {/* <button className='btn btn-danger m-2' style={{ fontWeight: "bold" }}><Link id="link" to="/mess">Search mess</Link></button> */}
                 </div>
             </div>

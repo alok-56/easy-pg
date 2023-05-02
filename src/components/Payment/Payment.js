@@ -33,7 +33,7 @@ const Payment = () => {
             var Difference_In_Time = date2.getTime() - date1;
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
             console.log(Difference_In_Days)
-            if (Difference_In_Days > 30) {
+            if (Difference_In_Days > 30 + data[i].extendpay) {
                 if (data[i].status !== 'cancelled') {
                     let id = data[i]._id;
                     let update = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
@@ -44,7 +44,11 @@ const Payment = () => {
                         }
                     })
                     update = await update.json();
-                    if (Difference_In_Days > 35) {
+                    console.log(update)
+                    if (update.matchedCount > 0) {
+                        datenotify(data[i].email, data[i]._id)
+                    }
+                    if (Difference_In_Days > 35 + data[i].extendpay) {
                         let id = data[i]._id;
                         let update = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
                             method: "put",
@@ -56,8 +60,8 @@ const Payment = () => {
                         update = await update.json();
                         if (update.matchedCount > 0) {
                             setBookid(data[i]._id)
-                            sendCancelemail();
-                            ownerCancelemail();
+                            sendCancelemail(data[i].email, data[i]._id);
+                            ownerCancelemail(data[i].owner, data[i]._id);
                             getproduct(data[i].productId)
                         }
                     }
@@ -65,6 +69,23 @@ const Payment = () => {
             }
         }
     }
+
+    const datenotify = async (email, id) => {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/datenotify`, {
+            method: "post",
+            body: JSON.stringify({ email, id }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        data = await data.json();
+        if (data) {
+            console.log("date notify to user send")
+        }
+    }
+
+
 
     const getproduct = async (id) => {
         let data = await fetch(`https://easy-ser.vercel.app/room/roomlist/${id}`);
@@ -92,7 +113,7 @@ const Payment = () => {
         }
     }
 
-    const sendCancelemail = async (email) => {
+    const sendCancelemail = async (email, id) => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancel`, {
             method: "post",
             body: JSON.stringify({ email, id }),
@@ -107,8 +128,8 @@ const Payment = () => {
         }
     }
 
-    const ownerCancelemail = async () => {
-        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book//cancelowner`, {
+    const ownerCancelemail = async (email, id) => {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/cancelowner`, {
             method: "post",
             body: JSON.stringify({ email, id }),
             headers: {
@@ -124,7 +145,7 @@ const Payment = () => {
 
 
 
-    const handlerazarpay = async (data, id, book, date, last) => {
+    const handlerazarpay = async (data, id, book, date, last, owner, user) => {
         setLoads(false)
         const options = {
             key: 'rzp_test_MtraH0q566XjUb',
@@ -144,11 +165,44 @@ const Payment = () => {
                 if (data.code === 200) {
                     postbooking(data, id);
                     update(book, date, last);
+                    ownerRepayemail(owner, id);
+                    userRepayemail(user, id);
                 }
+
             }
         }
         const rzp = new window.Razorpay(options)
         rzp.open();
+    }
+
+    const ownerRepayemail = async (email, book) => {
+        console.log("owner email", email)
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/repayowner`, {
+            method: "post",
+            body: JSON.stringify({ email, book }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+        data = await data.json();
+        if (data) {
+            console.log("Repay email send to owner")
+        }
+    }
+
+    const userRepayemail = async (email, book) => {
+        let data = await fetch(`https://easy-ser.vercel.app/roombooking/repayuser`, {
+            method: "post",
+            body: JSON.stringify({ email, book }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        data = await data.json();
+        if (data) {
+            console.log("Repay email send to user")
+        }
     }
 
     const update = async (id, da, last) => {
@@ -157,10 +211,11 @@ const Payment = () => {
         const time = date.getTime()
         const lastdate = new Date(last)
         lastdate.setDate(date.getDate() + 30)
+        let extendpay = 0;
         let pay = "paid";
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/updatebooking`, {
             method: "put",
-            body: JSON.stringify({ id, pay, date, time, lastdate }),
+            body: JSON.stringify({ id, pay, date, time, lastdate, extendpay }),
             headers: {
                 'content-Type': 'application/json'
             }
@@ -186,7 +241,7 @@ const Payment = () => {
         data = await data.json();
     }
 
-    const Paynow = async (price, id, status, book, pro, date, last) => {
+    const Paynow = async (price, id, status, book, pro, date, last, owner, user) => {
         setLoads(true)
         if (status === "cancelled") {
             navigate('/rooms/single/' + pro)
@@ -203,7 +258,7 @@ const Payment = () => {
 
             result = await result.json();
             if (result.code === 200) {
-                handlerazarpay(result.data, id, book, date, last)
+                handlerazarpay(result.data, id, book, date, last, owner, user)
             }
 
 
@@ -256,7 +311,7 @@ const Payment = () => {
                                             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Status :</span><span style={{ color: "red", fontWeight: "bold", marginLeft: '5px' }}>{item.pay}</span><br></br>
                                             {
                                                 // item.status === 'cancelled' ? null : 
-                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId, item.date, item.lastdate)}>Pay now</Button>
+                                                <Button variant="outline-danger" onClick={() => Paynow(item.price, item._id, item.status, item._id, item.productId, item.date, item.lastdate, item.ownerEmail, item.email)}>Pay now</Button>
 
                                             }
 

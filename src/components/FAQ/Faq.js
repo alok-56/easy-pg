@@ -91,7 +91,7 @@ const Faq = () => {
                             }}>step 1 : Go to your profile section <br></br>
                                 step 2 : click on my booking buttom <br></br>
                                 step 3 : click on cancel booking buttom <br></br>
-                                step 4 : enter the reason of cancellation <br></br>
+                                step 4 : Select Yes for cancellation <br></br>
                                 step 5 : click ok button</p> : null
                         }
 

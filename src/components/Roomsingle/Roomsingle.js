@@ -40,6 +40,7 @@ function MyVerticallyCenteredModal(props) {
     const [ownerNumber, setOwnernNumber] = useState()
 
     const [remaining, setRemaining] = useState('')
+    let extendpay = 0;
 
     const [add, setAdd] = useState('')
     const params = useParams();
@@ -121,7 +122,7 @@ function MyVerticallyCenteredModal(props) {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/postbooking`, {
             method: "post",
             body: JSON.stringify({
-                usersId, sellerId, transitionId, orderId, lastdate, productId, name, pay, email, img, Ages, date, time, status, price, roomname, state, add, district, ownerEmail, ownername, ownerNumber
+                usersId, sellerId, transitionId, orderId, lastdate, productId, name, pay, email, img, Ages, date, time, status, price, roomname, state, add, district, ownerEmail, ownername, ownerNumber, extendpay
             }),
             headers: {
                 'content-type': 'application/json'

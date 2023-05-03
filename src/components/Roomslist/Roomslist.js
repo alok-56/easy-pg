@@ -47,7 +47,7 @@ const Roomslist = () => {
                 <div className="container-fluid ">
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-3 col-9 order-first mt-2 ">
-                            <h2 style={{fontWeight:"bold"}}>EasyPg</h2>
+                            <h2 style={{ fontWeight: "bold" }}>EasyPg</h2>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-12 order-lg-first order-md-first order-sm-first order-last mt-2">
                             <div id="search">

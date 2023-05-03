@@ -20,6 +20,7 @@ function MyVerticallyCenteredModal(props) {
     const [load, setLoad] = useState(true)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [number, setNumber] = useState('')
     const [roomname, setRoomname] = useState('');
     const [Ages, setAges] = useState('');
     const [gender, setGender] = useState('');
@@ -37,7 +38,7 @@ function MyVerticallyCenteredModal(props) {
     const [district, setDistrict] = useState('');
     const [ownername, setOwnername] = useState('');
     const [ownerEmail, setOwnerEmail] = useState('');
-    const [ownerNumber, setOwnernNumber] = useState()
+    const [ownerNumber, setOwnerNumber] = useState()
 
     const [remaining, setRemaining] = useState('')
     let extendpay = 0;
@@ -52,10 +53,12 @@ function MyVerticallyCenteredModal(props) {
         const userid = JSON.parse(localStorage.getItem('user'))._id;
         const username = JSON.parse(localStorage.getItem('user')).name;
         const useremail = JSON.parse(localStorage.getItem('user')).email;
+        const numbers = JSON.parse(localStorage.getItem('user')).number;
         setUsersId(userid);
         setProductId(params.id);
         setName(username);
         setEmail(useremail);
+        setNumber(numbers)
         productdata();
 
 
@@ -75,7 +78,7 @@ function MyVerticallyCenteredModal(props) {
         setDistrict(data.district);
         setOwnername(data.name);
         setOwnerEmail(data.email);
-        setOwnernNumber(data.number)
+        setOwnerNumber(data.number)
         setAdd(data.address)
         setRemaining(data.remainingbed)
 
@@ -107,8 +110,6 @@ function MyVerticallyCenteredModal(props) {
                 data = await data.json();
                 if (data.code === 200) {
                     postbooking(data);
-                    sendEmail(data._id);
-                    sellerEmail(data._id);
                 }
             }
         }
@@ -133,6 +134,9 @@ function MyVerticallyCenteredModal(props) {
             navigate('/profile/booking/' + usersId)
             update()
             setLoad(false)
+            console.log("output", data._id)
+            sendEmail(data._id);
+            sellerEmail(data._id);
         }
         else {
             setLoad(false)
@@ -155,10 +159,11 @@ function MyVerticallyCenteredModal(props) {
         }
     }
 
-    const sendEmail = async (book) => {
+    const sendEmail = async () => {
+        console.log(ownerNumber)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/notify`, {
             method: "post",
-            body: JSON.stringify({ email, book, ownername, ownerNumber, sellerId }),
+            body: JSON.stringify({ email, ownername, ownerNumber, sellerId }),
             headers: {
                 'content-type': 'application/json'
             }
@@ -170,10 +175,10 @@ function MyVerticallyCenteredModal(props) {
         }
     }
 
-    const sellerEmail = async (book) => {
+    const sellerEmail = async () => {
         let data = await fetch('https://easy-ser.vercel.app/roombooking/book/sellnotify', {
             method: "post",
-            body: JSON.stringify({ ownerEmail, book, usersId, name, email }),
+            body: JSON.stringify({ ownerEmail, usersId, number, name, email }),
             headers: {
                 'content-type': 'application/json'
             }

@@ -107,8 +107,8 @@ function MyVerticallyCenteredModal(props) {
                 data = await data.json();
                 if (data.code === 200) {
                     postbooking(data);
-                    sendEmail();
-                    sellerEmail();
+                    sendEmail(data._id);
+                    sellerEmail(data._id);
                 }
             }
         }
@@ -155,10 +155,10 @@ function MyVerticallyCenteredModal(props) {
         }
     }
 
-    const sendEmail = async () => {
+    const sendEmail = async (book) => {
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/book/notify`, {
             method: "post",
-            body: JSON.stringify({ email, ownername, ownerNumber, sellerId }),
+            body: JSON.stringify({ email, book, ownername, ownerNumber, sellerId }),
             headers: {
                 'content-type': 'application/json'
             }
@@ -170,10 +170,10 @@ function MyVerticallyCenteredModal(props) {
         }
     }
 
-    const sellerEmail = async () => {
+    const sellerEmail = async (book) => {
         let data = await fetch('https://easy-ser.vercel.app/roombooking/book/sellnotify', {
             method: "post",
-            body: JSON.stringify({ ownerEmail, usersId, name, email }),
+            body: JSON.stringify({ ownerEmail, book, usersId, name, email }),
             headers: {
                 'content-type': 'application/json'
             }

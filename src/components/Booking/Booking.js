@@ -80,7 +80,7 @@ const Booking = () => {
                             getbook();
                             cancelRefund(id, email)
                             getproduct(product)
-
+                            setCan(false)
                         }
                     }
                     else {

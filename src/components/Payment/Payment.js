@@ -13,12 +13,15 @@ const Payment = () => {
     const [id, setBookid] = useState();
     const [email, setEmail] = useState();
     const [loads, setLoads] = useState(true)
+    const [name, setName] = useState()
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const emails = JSON.parse(localStorage.getItem('user')).email
         setEmail(emails)
+        const names = JSON.parse(localStorage.getItem('user')).name
+        setName(names)
         Payment();
     })
 
@@ -45,7 +48,7 @@ const Payment = () => {
                     })
                     update = await update.json();
                     console.log(update)
-                    if (update.matchedCount > 0) {
+                    if (update.modifiedCount > 0) {
                         datenotify(data[i].email, data[i]._id)
                     }
                     if (Difference_In_Days > 35 + data[i].extendpay) {
@@ -58,7 +61,7 @@ const Payment = () => {
                             }
                         })
                         update = await update.json();
-                        if (update.matchedCount > 0) {
+                        if (update.modifiedCount > 0) {
                             setBookid(data[i]._id)
                             sendCancelemail(data[i].email, data[i]._id);
                             ownerCancelemail(data[i].owner, data[i]._id);
@@ -179,7 +182,7 @@ const Payment = () => {
         console.log("owner email", email)
         let data = await fetch(`https://easy-ser.vercel.app/roombooking/repayowner`, {
             method: "post",
-            body: JSON.stringify({ email, book }),
+            body: JSON.stringify({ email, book, name }),
             headers: {
                 'content-type': 'application/json'
             }

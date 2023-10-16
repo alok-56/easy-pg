@@ -36,11 +36,11 @@ const Forgotpass = () => {
             });
             result = await result.json()
             if (result) {
-                setData(false)
+                setData(true)
             }
         }
         else {
-            alert("incoorect email")
+            alert("incorrect email")
         }
 
     }
@@ -113,7 +113,7 @@ const Forgotpass = () => {
                                     <div className="col " style={{ marginTop: "120px" }}>
                                         <div id="form4">
                                             <div id="logo4">
-                                                <h4 className="text-center"><img width={100} src={logo} /></h4>
+                                            <h2 className="text-center" style={{fontSize:30}}>EasyPg</h2>
                                             </div>
                                             <div id="info4">
                                                 <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter New password" ></input>
@@ -132,7 +132,7 @@ const Forgotpass = () => {
                                     <div className="col " style={{ marginTop: "190px" }}>
                                         <div id="form1">
                                             <div id="logo1">
-                                                <h4 className="text-center" style={{ color: "black" }}><img width={100} src={logo} /></h4>
+                                            <h2 className="text-center" style={{fontSize:30}}>EasyPg</h2>
                                             </div>
                                             <div id="info1">
                                                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter Your email" ></input>

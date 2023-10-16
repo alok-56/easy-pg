@@ -110,7 +110,7 @@ const Signup = () => {
                             <div className="col" style={{ marginTop: "100px" }}>
                                 <div id="form5">
                                     <div id="logo5">
-                                        <h4 className="text-center"><img width={100} src={logo} /></h4>
+                                        <h2 className="text-center" style={{fontSize:30}}>EasyPg</h2>
                                     </div>
                                     <div id="info5">
                                         <input type="text" value={name} onChange={(e) => SetName(e.target.value)} placeholder="Enter Your name" ></input>

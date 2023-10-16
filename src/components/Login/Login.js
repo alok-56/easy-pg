@@ -49,7 +49,7 @@ const Login = () => {
                                 <div className="col-12" style={{ marginTop: "120px" }}>
                                     <div id="form2">
                                         <div id="logo2">
-                                            <h4 className="text-center"><img width={100} src={logo} /></h4>
+                                        <h2 className="text-center" style={{fontSize:30}}>EasyPg</h2>
                                         </div>
                                         <div id="info2">
                                             <input type="email" value={email} onChange={(e) => SetEmail(e.target.value)} placeholder="Enter Your email" ></input>

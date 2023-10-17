@@ -317,7 +317,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Body>
         <Modal.Footer>
           {load ? (
-            <Button onClick={Paynow}>Proceed for payment</Button>
+            <Button onClick={Paynow}>Get Location</Button>
           ) : (
             <SpinnerCircular />
           )}
@@ -588,7 +588,7 @@ const Roomsingle = () => {
                         <div className="col-12 text-center">
                           <div>
                             <button className="btn btn-danger" onClick={fun}>
-                              Book now
+                              Add to Card
                             </button>
                           </div>
 

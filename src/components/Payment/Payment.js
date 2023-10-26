@@ -292,7 +292,7 @@ const Payment = () => {
                                     <div className="row">
                                         <div className="col-lg-5 col-md-5 col-sm-12 col-12">
                                             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                                                <img width={100} className="img-fluid" src={head} alt="Rooms"></img>
+                                                <img width={100} className="img-fluid" src={item.roomimg} alt="Rooms"></img>
                                                 <div>
                                                     <span style={{ fontSize: "12px" }}>{item.name}, {item.address}, {item.district}</span><br></br>
                                                     {/* <span style={{ fontSize: "12px" }}>Paid on 2 nov 2022</span><br></br> */}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import b1 from "./images/mess.jpg";
 import b2 from "./images/rooms.jpg";
 import "./Roomsingle.css";
 import Button from "react-bootstrap/Button";
@@ -14,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Chat from "../Chat";
 
 function MyVerticallyCenteredModal(props) {
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(100);
   const [load, setLoad] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +26,10 @@ function MyVerticallyCenteredModal(props) {
   const [singlebedprice, setSiglebedprice] = useState("");
   const [fullroomprice, setFullroomprice] = useState("");
   const [pay, setPay] = useState("paid");
+  const [roomimg, setRoomimg] = useState(" ");
+
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
 
   const [usersId, setUsersId] = useState("");
   const [productId, setProductId] = useState("");
@@ -78,6 +81,10 @@ function MyVerticallyCenteredModal(props) {
     setOwnerNumber(data.number);
     setAdd(data.address);
     setRemaining(data.remainingbed);
+    setRoomimg(data.roomimg);
+    setLat(data.lat);
+    setLon(data.lon);
+    console.log(roomimg);
   };
   var date = new Date();
   var time = new Date().getTime();
@@ -87,36 +94,36 @@ function MyVerticallyCenteredModal(props) {
   // console.log(usersId, sellerId, roomname, name, email, Ages, gender, price, transitionId, orderId, date,status)
 
   const handlerazarpay = async (data) => {
-    // const options = {
-    //   key: "rzp_test_MtraH0q566XjUb",
-    //   amount: Number(data.price) * 100,
-    //   currency: data.currency,
-    //   name: "THIRD HOME",
-    //   order_id: data.id,
-    //   handler: async function(response) {
-    //     let data = await fetch("https://easy-ser.vercel.app/payment/verify", {
-    //       method: "post",
-    //       body: JSON.stringify({ response }),
-    //       headers: {
-    //         "content-type": "application/json",
-    //       },
-    //     });
-    //     data = await data.json();
-    //     if (data.code === 200) {
-    //       postbooking(data);
-    //     }
-    //   },
-    // };
-    // const rzp = new window.Razorpay(options);
-    // rzp.open();
+    const options = {
+      key: "rzp_test_MtraH0q566XjUb",
+      amount: Number(data.price) * 100,
+      currency: data.currency,
+      name: "THIRD HOME",
+      order_id: data.id,
+      handler: async function(response) {
+        let data = await fetch("https://easy-ser.vercel.app/payment/verify", {
+          method: "post",
+          body: JSON.stringify({ response }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+        data = await data.json();
+        if (data.code === 200) {
+          postbooking(data);
+        }
+      },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
   const postbooking = async (db) => {
     setLoad(true);
-    // let transitionId = db.data.payment_id;
-    // let orderId = db.data.order_id;
+    let transitionId = db.data.payment_id;
+    let orderId = db.data.order_id;
 
-    let transitionId = "Free";
-    let orderId = "Free";
+    // let transitionId = "Free";
+    // let orderId = "Free";
 
     let data = await fetch(
       `https://easy-ser.vercel.app/roombooking/postbooking`,
@@ -132,7 +139,7 @@ function MyVerticallyCenteredModal(props) {
           name,
           pay,
           email,
-          img,
+          roomimg,
           Ages,
           date,
           time,
@@ -146,6 +153,8 @@ function MyVerticallyCenteredModal(props) {
           ownername,
           ownerNumber,
           extendpay,
+          lat,
+          lon,
         }),
         headers: {
           "content-type": "application/json",
@@ -185,12 +194,18 @@ function MyVerticallyCenteredModal(props) {
   };
 
   const sendEmail = async () => {
-    console.log(ownerNumber);
+    let track = `https://www.google.com/maps?q=${lat},${lon}&z=17&hl=en`;
     let data = await fetch(
       `https://easy-ser.vercel.app/roombooking/book/notify`,
       {
         method: "post",
-        body: JSON.stringify({ email, ownername, ownerNumber, sellerId }),
+        body: JSON.stringify({
+          email,
+          ownername,
+          ownerNumber,
+          sellerId,
+          track,
+        }),
         headers: {
           "content-type": "application/json",
         },
@@ -224,22 +239,20 @@ function MyVerticallyCenteredModal(props) {
     setTimeout(() => {
       setLoad(true);
     }, 3000);
-    // let result = await fetch(`https://easy-ser.vercel.app/payment/orders`, {
-    //   method: "post",
-    //   body: JSON.stringify({ price }),
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    // });
-    // result = await result.json();
-    // console.log(result);
-    // if (result.code === 200) {
-    //   handlerazarpay(result.data);
-    // } else {
-    //   toast("Empty Details");
-    // }
-
-    postbooking();
+    let result = await fetch(`https://easy-ser.vercel.app/payment/orders`, {
+      method: "post",
+      body: JSON.stringify({ price }),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.log(result);
+    if (result.code === 200) {
+      handlerazarpay(result.data);
+    } else {
+      toast("Empty Details");
+    }
   };
   return (
     <div>
@@ -317,7 +330,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Body>
         <Modal.Footer>
           {load ? (
-            <Button onClick={Paynow}>Get Location</Button>
+            <Button onClick={Paynow}>Proceed</Button>
           ) : (
             <SpinnerCircular />
           )}
@@ -358,6 +371,9 @@ const Roomsingle = () => {
   const params = useParams();
   const [load, setLoad] = useState(true);
   const [load1, setLoad1] = useState(true);
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+
   useEffect(() => {
     Roomsingle();
   }, []);
@@ -395,6 +411,9 @@ const Roomsingle = () => {
     setFurniture(data.furniture);
     setCommanarea(data.commonarea);
     setLoad1(false);
+    setImage(data.roomimg);
+    setLat(data.lat);
+    setLon(data.lon);
   };
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -437,7 +456,7 @@ const Roomsingle = () => {
                         <Carousel.Item>
                           <img
                             className="d-block w-100"
-                            src={b2}
+                            src={image}
                             alt="First slide"
                             style={{ height: "330px", borderRadius: "5px" }}
                           />
@@ -445,7 +464,7 @@ const Roomsingle = () => {
                         <Carousel.Item>
                           <img
                             className="d-block w-100"
-                            src={b2}
+                            src={image}
                             alt="Second slide"
                             style={{ height: "330px", borderRadius: "5px" }}
                           />
@@ -453,7 +472,7 @@ const Roomsingle = () => {
                         <Carousel.Item>
                           <img
                             className="d-block w-100"
-                            src={b2}
+                            src={image}
                             alt="Third slide"
                             style={{ height: "330px", borderRadius: "5px" }}
                           />
@@ -585,10 +604,14 @@ const Roomsingle = () => {
                           </div>
                         </div>
                         <hr></hr>
-                        <div className="col-12 text-center">
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-6 text-center">
                           <div>
-                            <button className="btn btn-danger" onClick={fun}>
-                              Add to Card
+                            <button
+                              className="btn btn-danger"
+                              onClick={fun}
+                              style={{ width: "100%" }}
+                            >
+                              Book Now
                             </button>
                           </div>
 
@@ -596,6 +619,24 @@ const Roomsingle = () => {
                             show={modalShow}
                             onHide={() => setModalShow(false)}
                           />
+                        </div>
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-6 text-center">
+                          <div>
+                            <button
+                              className="btn btn-danger"
+                              style={{ width: "100%" }}
+                            >
+                              <a
+                                href={`https://www.google.com/maps?q=${lat},${lon}&z=17&hl=en`}
+                                style={{
+                                  textDecoration: "none",
+                                  color: "#fff",
+                                }}
+                              >
+                                Track location
+                              </a>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

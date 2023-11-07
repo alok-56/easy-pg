@@ -34,8 +34,8 @@ const Login = () => {
         setLoading(false);
         toast("Wrong detail");
       }
-    }else{
-        toast("Empty details")
+    } else {
+      toast("Empty details");
     }
   };
   return (
